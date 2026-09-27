@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0E4744">
+<title>Grammatik · Español</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+
+</head>
+<body>
+
+<div class="backbar"><a href="index.html">← Español</a></div>
+<header class="hero"><div class="in">
+  <h1>Grammatik</h1>
+  <p>Alle Themen bis zum Abitur — was fertig ist, was noch kommt, und wie du stehst.</p>
+  <div class="chip" id="fortschritt">5 von 11 Themen aufbereitet</div>
+</div></header>
+<div class="wrap">
+  <section>
+    <h2>Deine Themen</h2>
+    <div class="sub">Grammatikseiten sind zum <b>Nachschlagen</b> da, nicht zum Auswendiglernen.
+    Der Selbsttest auf jeder Seite zählt in deinen Fortschritt.</div>
+    <a class="tile" href="lernzettel/indefinido-imperfecto.html" data-topic="Indefinido vs. Imperfecto"><div class="n">Indefinido vs. Imperfecto <span class="badge ok">fertig</span></div><div class="d">Wann welche Vergangenheit? Formen, Signalwörter, Selbsttest</div><div class="d stand" style="margin-top:5px"></div></a>
+<a class="tile" href="lernzettel/imperfecto.html" data-topic="Pretérito imperfecto"><div class="n">Pretérito imperfecto <span class="badge ok">fertig</span></div><div class="d">Die Zeitform für „früher&quot; — Formen, Gebrauch, antes/hoy</div><div class="d stand" style="margin-top:5px"></div></a>
+<a class="tile" href="lernzettel/imperativo-negativo.html" data-topic="Verneinter Imperativ"><div class="n">Verneinter Imperativ <span class="badge ok">fertig</span></div><div class="d">„Tu das nicht!&quot; — Bau-Regel in drei Schritten</div><div class="d stand" style="margin-top:5px"></div></a>
+<a class="tile" href="lernzettel/argumentieren.html" data-topic="Argumentieren &amp; Satzbau"><div class="n">Argumentieren &amp; Satzbau <span class="badge ok">fertig</span></div><div class="d">Meinung, Begründung, Verbindungswörter</div><div class="d stand" style="margin-top:5px"></div></a>
+<a class="tile" href="lernzettel/konjugation.html" data-topic="Konjugation &amp; ser/estar"><div class="n">Konjugation &amp; ser/estar <span class="badge ok">fertig</span></div><div class="d">21 Verben × 3 Zeiten, ser/estar im Vergleich</div><div class="d stand" style="margin-top:5px"></div></a>
+<div class="tile dim"><div class="n">Pronomen le / lo / se <span class="badge open">offen</span></div><div class="d">Wem oder wen? Dativ und Akkusativ, Stellung im Satz</div></div>
+<div class="tile dim"><div class="n">Subjuntivo <span class="badge open">offen</span></div><div class="d">Die Form für Wunsch, Zweifel und Gefühl — kommt in Q1</div></div>
+<div class="tile dim"><div class="n">Condicional <span class="badge open">offen</span></div><div class="d">„würde&quot; — höfliche Bitten und Bedingungen</div></div>
+<div class="tile dim"><div class="n">Futuro <span class="badge open">offen</span></div><div class="d">Zukunft mit ir a und die eigene Futur-Form</div></div>
+<div class="tile dim"><div class="n">Passiv &amp; se-Konstruktionen <span class="badge open">offen</span></div><div class="d">se venden pisos — wenn niemand genannt wird</div></div>
+<div class="tile dim"><div class="n">Indirekte Rede <span class="badge open">offen</span></div><div class="d">Dijo que… — Zeitverschiebung beim Wiedergeben</div></div>
+
+  </section>
+  <section>
+    <div class="bar" style="height:10px"><i style="width:45%"></i></div>
+    <div class="sub" style="margin-top:7px">Grammatik ist ein Projekt mit Ende. Wenn alle Themen stehen,
+    ist dieser Teil für das Abitur abgehakt.</div>
+  </section>
+</div>
+<footer>Grammatik · <b>mi cerebro</b></footer>
+<script src="../assets/core.js"></script>
+<script>
+document.querySelectorAll('.tile[data-topic]').forEach(function(t){
+  var s=MC.score(t.dataset.topic), el=t.querySelector('.stand');
+  el.textContent = s ? ('Dein Stand: '+s.percent+' % · zuletzt vor '+s.daysAgo+' Tagen')
+                     : 'Noch nicht getestet';
+  el.style.color = s && s.percent<70 ? 'var(--terra)' : 'var(--soft)';
+});
+</script>
+</body></html>

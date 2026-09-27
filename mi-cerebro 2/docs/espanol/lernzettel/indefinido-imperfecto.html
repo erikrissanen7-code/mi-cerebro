@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lernzettel · Indefinido & Imperfecto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF5E9; --paper2:#F4EAD6; --ink:#2B2419; --soft:#6B5E48;
+    --teal:#156460; --teal-deep:#0E4744; --terra:#C9502B; --gold:#E0A02A;
+    --card:#FFFFFF; --line:#E7DBC2; --ok:#1f7a4d;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--paper); color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif; line-height:1.5;
+    -webkit-font-smoothing:antialiased; padding-bottom:64px;
+  }
+  .wrap{max-width:680px;margin:0 auto;padding:0 16px}
+
+  /* HERO */
+  header.hero{
+    background:linear-gradient(150deg,var(--teal-deep),var(--teal));
+    color:#fff; padding:30px 16px 22px; text-align:center;
+    border-bottom:4px solid var(--gold);
+  }
+  .hero .eyebrow{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600}
+  .hero h1{font-family:'Fraunces',serif;font-weight:600;font-size:1.9rem;line-height:1.1;margin:6px 0 4px}
+  .hero h1 span{font-style:italic;color:#ffe9bf}
+  .hero p{font-size:.86rem;opacity:.9;max-width:440px;margin:0 auto}
+
+  /* TABS */
+  nav.tabs{
+    position:sticky;top:0;z-index:20;background:var(--paper);
+    border-bottom:1px solid var(--line); display:flex; gap:4px;
+    padding:8px 10px; overflow-x:auto; -webkit-overflow-scrolling:touch;
+  }
+  nav.tabs button{
+    flex:0 0 auto; border:1px solid var(--line); background:var(--card);
+    color:var(--soft); font-family:inherit; font-weight:600; font-size:.82rem;
+    padding:8px 14px; border-radius:999px; cursor:pointer; white-space:nowrap;
+    transition:all .15s;
+  }
+  nav.tabs button.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+  nav.tabs button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+  section.tab{display:none;padding:22px 0 10px;animation:fade .25s ease}
+  section.tab.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  .eyebrow2{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--teal);font-weight:700;margin-bottom:4px}
+  h2{font-family:'Fraunces',serif;font-weight:600;font-size:1.45rem;margin-bottom:2px}
+  h2 em{color:var(--terra);font-style:italic}
+  .lead{color:var(--soft);font-size:.9rem;margin-bottom:18px}
+  h3{font-family:'Fraunces',serif;font-weight:600;font-size:1.12rem;margin:22px 0 8px;display:flex;align-items:center;gap:8px}
+  h3 .dot{width:9px;height:9px;border-radius:50%;background:var(--terra);flex:0 0 auto}
+
+  /* IDEA BOX */
+  .idea{background:#EAF2F0;border-left:4px solid var(--teal);border-radius:10px;padding:13px 15px;margin:6px 0 4px;font-size:.9rem}
+  .idea b{color:var(--teal-deep)}
+  .signal{background:#FBEFD9;border-left:4px solid var(--gold);border-radius:10px;padding:11px 14px;font-size:.84rem;margin:10px 0}
+  .signal b{color:#9a6c08}
+  .warn{background:#FBE6DE;border-left:4px solid var(--terra);border-radius:10px;padding:11px 14px;font-size:.84rem;margin:10px 0}
+  .warn b{color:var(--terra)}
+
+  /* CONJUGATION TABLES */
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:6px 0;font-size:.9rem}
+  thead th{background:var(--teal);color:#fff;font-weight:600;font-size:.82rem;padding:9px 8px;text-align:left}
+  tbody td,tbody th{padding:8px;border-top:1px solid var(--line);text-align:left;vertical-align:middle}
+  tbody th{font-weight:500;color:var(--soft);font-size:.82rem;white-space:nowrap}
+  .end{color:var(--terra);font-weight:700}
+  .root{color:var(--ink)}
+  tbody tr:nth-child(even) td,tbody tr:nth-child(even) th{background:#FCF9F1}
+  .note{font-size:.78rem;color:var(--soft);margin:4px 2px 0}
+
+  /* STRONG VERB CARDS */
+  .grid{display:grid;grid-template-columns:1fr;gap:9px;margin:8px 0}
+  @media(min-width:520px){.grid{grid-template-columns:1fr 1fr}}
+  .vc{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:11px 13px}
+  .vc .top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:5px}
+  .vc .inf{font-weight:700;font-size:1rem}
+  .vc .de{font-size:.8rem;color:var(--soft);font-style:italic;text-align:right}
+  .vc .forms{font-size:.84rem;color:var(--ink)}
+  .vc .forms b{color:var(--terra)}
+  .vc .yo{display:inline-block;background:var(--paper2);border-radius:6px;padding:1px 7px;font-weight:700;margin-bottom:3px}
+
+  /* VERB LIST */
+  .vlist{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:6px 0}
+  .vlist .row{display:flex;justify-content:space-between;gap:10px;padding:9px 13px;border-top:1px solid var(--line);font-size:.9rem}
+  .vlist .row:first-child{border-top:none}
+  .vlist .es{font-weight:600;color:var(--teal-deep)}
+  .vlist .de{color:var(--soft);text-align:right}
+  .vlist .row.irr .es::after{content:"★";color:var(--gold);font-size:.7rem;margin-left:5px;vertical-align:super}
+
+  /* SELF TEST TOGGLE */
+  .testbar{display:flex;align-items:center;gap:10px;background:#EAF2F0;border:1px dashed var(--teal);border-radius:10px;padding:10px 13px;margin:14px 0;font-size:.85rem}
+  .testbar button{margin-left:auto;background:var(--teal);color:#fff;border:none;font-family:inherit;font-weight:600;font-size:.8rem;padding:7px 13px;border-radius:8px;cursor:pointer}
+  body.hideforms .end, body.hideforms .vc .forms b, body.hideforms .vc .yo{
+    background:var(--ink);color:var(--ink);border-radius:4px;cursor:pointer;transition:.15s
+  }
+  body.hideforms .reveal{background:transparent!important;color:var(--terra)!important}
+
+  /* QUIZ */
+  .quiz .q{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:13px 15px;margin:10px 0}
+  .quiz .ask{font-size:.95rem;font-weight:500;margin-bottom:9px}
+  .quiz .ask .pill{display:inline-block;background:var(--paper2);color:var(--teal-deep);font-size:.7rem;font-weight:700;padding:2px 8px;border-radius:999px;margin-right:6px;text-transform:uppercase;letter-spacing:.04em}
+  .quiz .ask b{color:var(--terra)}
+  .quiz button.show-a{background:var(--teal);color:#fff;border:none;font-family:inherit;font-weight:600;font-size:.8rem;padding:7px 14px;border-radius:8px;cursor:pointer}
+  .quiz button.show-a:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+  .quiz .ans{display:none;margin-top:9px;padding:9px 12px;background:#EAF6EE;border-left:4px solid var(--ok);border-radius:8px;font-size:.92rem}
+  .quiz .ans.open{display:block}
+  .quiz .ans b{color:var(--ok)}
+
+  footer{text-align:center;color:var(--soft);font-size:.78rem;padding:26px 16px 10px}
+  footer b{color:var(--teal-deep)}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+  .backbar{position:sticky;top:0;z-index:99;background:#FBF5E9;border-bottom:1px solid #E7DBC2;padding:9px 16px}
+  .backbar a{color:#0E4744;text-decoration:none;font-weight:600;font-size:.86rem;font-family:'Inter',system-ui,sans-serif}
+</style>
+</head>
+<body>
+<div class="backbar"><a href="../grammatik.html">&larr; Grammatik</a></div>
+
+<header class="hero">
+  <div class="eyebrow">Examen · el lunes</div>
+  <h1>Pretérito <span>indefinido</span> & <span>imperfecto</span></h1>
+  <p>Dein Lernzettel nach dem Cornelsen-Buch (§47–48 & §54). Alle unregelmäßigen Verben mit Bedeutung. ¡Vamos!</p>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button class="active" data-t="ind">① Indefinido</button>
+  <button data-t="imp">② Imperfecto</button>
+  <button data-t="verbs">③ Verben DE–ES</button>
+  <button data-t="quiz">④ Quiz</button>
+</nav>
+
+<div class="wrap">
+
+<!-- ================= INDEFINIDO ================= -->
+<section class="tab show" id="ind">
+  <div class="eyebrow2">Unidad 6 · §47–48</div>
+  <h2>El pretérito <em>indefinido</em></h2>
+  <p class="lead">Die „Was-ist-passiert?"-Zeit für abgeschlossene Ereignisse.</p>
+
+  <div class="idea">💡 <b>Die Idee:</b> abgeschlossene, fertige Handlungen in der Vergangenheit. <i>„Ayer hablé con Pablo."</i> = Gestern sprach ich mit Pablo.</div>
+  <div class="signal">🔔 <b>Signalwörter:</b> ayer, anteayer, el lunes pasado, la semana pasada, el año pasado, en 2023, de repente, una vez</div>
+
+  <h3><span class="dot"></span>Regelmäßige Verben</h3>
+  <table>
+    <thead><tr><th>Person</th><th>-ar · hablar</th><th>-er · comer</th><th>-ir · vivir</th></tr></thead>
+    <tbody>
+      <tr><th>yo</th><td><span class="root">habl</span><span class="end">é</span></td><td>com<span class="end">í</span></td><td>viv<span class="end">í</span></td></tr>
+      <tr><th>tú</th><td>habl<span class="end">aste</span></td><td>com<span class="end">iste</span></td><td>viv<span class="end">iste</span></td></tr>
+      <tr><th>él/ella</th><td>habl<span class="end">ó</span></td><td>com<span class="end">ió</span></td><td>viv<span class="end">ió</span></td></tr>
+      <tr><th>nosotros</th><td>habl<span class="end">amos</span></td><td>com<span class="end">imos</span></td><td>viv<span class="end">imos</span></td></tr>
+      <tr><th>vosotros</th><td>habl<span class="end">asteis</span></td><td>com<span class="end">isteis</span></td><td>viv<span class="end">isteis</span></td></tr>
+      <tr><th>ellos</th><td>habl<span class="end">aron</span></td><td>com<span class="end">ieron</span></td><td>viv<span class="end">ieron</span></td></tr>
+    </tbody>
+  </table>
+  <p class="note">🧠 <b>-er & -ir = Zwillinge</b> → exakt gleiche Endungen. · Akzent nur bei <b>yo</b> & <b>él/ella</b>.</p>
+  <div class="warn">⚠️ <b>Achtung:</b> Bei <i>-ar</i> & <i>-ir</i> ist <i>nosotros</i> gleich wie im Präsens (<i>vivimos</i> = jetzt & damals). Der Kontext entscheidet.</div>
+
+  <h3><span class="dot"></span>Rechtschreib-Besonderheiten</h3>
+  <table>
+    <thead><tr><th>Infinitiv</th><th>yo-Form</th><th>Besonderheit</th></tr></thead>
+    <tbody>
+      <tr><th>llegar</th><td>lle<span class="end">gu</span>é</td><td>g → gu</td></tr>
+      <tr><th>tocar</th><td>to<span class="end">qu</span>é</td><td>c → qu</td></tr>
+      <tr><th>empezar</th><td>empe<span class="end">c</span>é</td><td>z → c</td></tr>
+      <tr><th>leer</th><td>leí · le<span class="end">yó</span></td><td>i → y (3. Pers.)</td></tr>
+      <tr><th>construir</th><td>construí · constru<span class="end">yó</span></td><td>i → y (3. Pers.)</td></tr>
+      <tr><th>ver</th><td>vi · vio</td><td>kein Akzent</td></tr>
+    </tbody>
+  </table>
+  <p class="note"><b>Ebenso wie:</b> llegar → jugar, pagar, pegar · tocar → buscar, sacar, explicar, practicar · empezar → organizar, cruzar, utilizar · leer → creer · construir → destruir</p>
+
+  <h3><span class="dot"></span>Stammwechsel in der 3. Person (nur -ir)</h3>
+  <table>
+    <thead><tr><th>Infinitiv (Bedeutung)</th><th>3. Sg.</th><th>3. Pl.</th></tr></thead>
+    <tbody>
+      <tr><th>dormir · <i>schlafen</i></th><td>d<span class="end">u</span>rmió</td><td>d<span class="end">u</span>rmieron</td></tr>
+      <tr><th>pedir · <i>bitten/bestellen</i></th><td>p<span class="end">i</span>dió</td><td>p<span class="end">i</span>dieron</td></tr>
+    </tbody>
+  </table>
+  <p class="note">o → u: auch <b>morir</b> (sterben). · e → i: auch <b>seguir</b> (folgen), <b>repetir</b> (wiederholen), <b>elegir</b> (wählen), <b>convertirse</b> (sich verwandeln).</p>
+
+  <div class="testbar">🙈 <span>Formen ausblenden & dich selbst testen (tippe auf eine Form zum Aufdecken)</span><button onclick="document.body.classList.toggle('hideforms')">An / Aus</button></div>
+
+  <h3><span class="dot"></span>Unregelmäßige „starke" Verben</h3>
+  <div class="idea">Neuer Stamm + <b>für alle gleiche Endungen:</b> <span class="end" style="color:var(--terra)">-e · -iste · -o · -imos · -isteis · -ieron</span> — <b>ohne Akzent!</b></div>
+  <div class="grid">
+    <div class="vc"><div class="top"><span class="inf">tener</span><span class="de">haben</span></div><div class="forms"><span class="yo">tuve</span><br>tuv-iste · tuv-o · tuv-imos · tuv-isteis · tuv-ieron</div></div>
+    <div class="vc"><div class="top"><span class="inf">estar</span><span class="de">sein / sich befinden</span></div><div class="forms"><span class="yo">estuve</span><br>estuv-iste · estuv-o · … · estuv-ieron</div></div>
+    <div class="vc"><div class="top"><span class="inf">poder</span><span class="de">können</span></div><div class="forms"><span class="yo">pude</span><br>pud-iste · pud-o · … · pud-ieron</div></div>
+    <div class="vc"><div class="top"><span class="inf">poner</span><span class="de">stellen / legen / setzen</span></div><div class="forms"><span class="yo">puse</span><br>pus-iste · pus-o · … · pus-ieron</div></div>
+    <div class="vc"><div class="top"><span class="inf">saber</span><span class="de">wissen</span></div><div class="forms"><span class="yo">supe</span><br>sup-iste · sup-o · … · sup-ieron</div></div>
+    <div class="vc"><div class="top"><span class="inf">querer</span><span class="de">wollen / mögen</span></div><div class="forms"><span class="yo">quise</span><br>quis-iste · quis-o · … · quis-ieron</div></div>
+    <div class="vc"><div class="top"><span class="inf">venir</span><span class="de">kommen</span></div><div class="forms"><span class="yo">vine</span><br>vin-iste · vin-o · … · vin-ieron</div></div>
+    <div class="vc"><div class="top"><span class="inf">hacer</span><span class="de">machen / tun</span></div><div class="forms"><span class="yo">hice</span><br>hic-iste · <b>hizo</b> (z!) · … · hic-ieron</div></div>
+    <div class="vc"><div class="top"><span class="inf">decir</span><span class="de">sagen</span></div><div class="forms"><span class="yo">dije</span><br>dij-iste · dij-o · … · <b>dij-eron</b></div></div>
+    <div class="vc"><div class="top"><span class="inf">traer</span><span class="de">bringen / mitbringen</span></div><div class="forms"><span class="yo">traje</span><br>traj-iste · traj-o · … · <b>traj-eron</b></div></div>
+    <div class="vc"><div class="top"><span class="inf">ir / ser</span><span class="de">gehen / sein</span></div><div class="forms"><span class="yo">fui</span><br>fuiste · fue · fuimos · fuisteis · fueron</div></div>
+    <div class="vc"><div class="top"><span class="inf">dar</span><span class="de">geben</span></div><div class="forms"><span class="yo">di</span><br>diste · dio · dimos · disteis · dieron</div></div>
+  </div>
+  <div class="warn">⚠️ <b>hacer:</b> 3. Person mit <b>z</b> → <i>hizo</i>. · <b>decir & traer:</b> 3. Plural endet auf <b>-eron</b> (dijeron, trajeron). · <b>hay</b> (es gibt) → <b>hubo</b>.</div>
+</section>
+
+<!-- ================= IMPERFECTO ================= -->
+<section class="tab" id="imp">
+  <div class="eyebrow2">Unidad 8 · §54</div>
+  <h2>El pretérito <em>imperfecto</em></h2>
+  <p class="lead">Die „Wie-war-es-früher?"-Zeit für Gewohnheiten & Zustände.</p>
+
+  <div class="idea">💡 <b>Die Idee:</b> beschreibt, wie etwas <b>früher war</b> — Gewohnheiten und Zustände. <i>„Antes siempre cambiábamos las toallas."</i> = Früher wechselten wir immer die Handtücher.</div>
+  <div class="signal">🔔 <b>Signalwörter:</b> antes, en aquel entonces, en aquellos años, en el pasado, en los años…, cada día/semana/año, todos los días, normalmente, siempre</div>
+
+  <h3><span class="dot"></span>Regelmäßige Verben</h3>
+  <table>
+    <thead><tr><th>Person</th><th>-ar · hablar</th><th>-er · comer</th><th>-ir · vivir</th></tr></thead>
+    <tbody>
+      <tr><th>yo</th><td>habl<span class="end">aba</span></td><td>com<span class="end">ía</span></td><td>viv<span class="end">ía</span></td></tr>
+      <tr><th>tú</th><td>habl<span class="end">abas</span></td><td>com<span class="end">ías</span></td><td>viv<span class="end">ías</span></td></tr>
+      <tr><th>él/ella</th><td>habl<span class="end">aba</span></td><td>com<span class="end">ía</span></td><td>viv<span class="end">ía</span></td></tr>
+      <tr><th>nosotros</th><td>habl<span class="end">ábamos</span></td><td>com<span class="end">íamos</span></td><td>viv<span class="end">íamos</span></td></tr>
+      <tr><th>vosotros</th><td>habl<span class="end">abais</span></td><td>com<span class="end">íais</span></td><td>viv<span class="end">íais</span></td></tr>
+      <tr><th>ellos</th><td>habl<span class="end">aban</span></td><td>com<span class="end">ían</span></td><td>viv<span class="end">ían</span></td></tr>
+    </tbody>
+  </table>
+  <p class="note">🧠 Wieder <b>-er & -ir = Zwillinge</b>. · 1. & 3. Person Singular sind <b>immer gleich</b> (hablaba = ich/er/sie). · Der Stamm wird nie betont.</p>
+
+  <h3><span class="dot"></span>Die einzigen 3 Unregelmäßigen 🎉</h3>
+  <table>
+    <thead><tr><th>Person</th><th>ser · sein</th><th>ir · gehen</th><th>ver · sehen</th></tr></thead>
+    <tbody>
+      <tr><th>yo</th><td class="end">era</td><td class="end">iba</td><td>v<span class="end">eía</span></td></tr>
+      <tr><th>tú</th><td class="end">eras</td><td class="end">ibas</td><td>v<span class="end">eías</span></td></tr>
+      <tr><th>él/ella</th><td class="end">era</td><td class="end">iba</td><td>v<span class="end">eía</span></td></tr>
+      <tr><th>nosotros</th><td class="end">éramos</td><td class="end">íbamos</td><td>v<span class="end">eíamos</span></td></tr>
+      <tr><th>vosotros</th><td class="end">erais</td><td class="end">ibais</td><td>v<span class="end">eíais</span></td></tr>
+      <tr><th>ellos</th><td class="end">eran</td><td class="end">iban</td><td>v<span class="end">eían</span></td></tr>
+    </tbody>
+  </table>
+  <p class="note">🪄 Merke: <b>nur ser, ir, ver</b> sind unregelmäßig — alles andere ist easy.</p>
+
+  <div class="testbar">🙈 <span>Selbsttest: Formen ausblenden, antippen zum Aufdecken</span><button onclick="document.body.classList.toggle('hideforms')">An / Aus</button></div>
+</section>
+
+<!-- ================= VERBEN DE-ES ================= -->
+<section class="tab" id="verbs">
+  <div class="eyebrow2">Tu problema → solucionado</div>
+  <h2>Wichtige Verben <em>DE–ES</em></h2>
+  <p class="lead">Damit du Verben beim Lesen & Schreiben sofort erkennst. <span style="color:var(--gold)">★</span> = unregelmäßig im indefinido.</p>
+
+  <h3><span class="dot"></span>Die Top-Verben (must-know)</h3>
+  <div class="vlist">
+    <div class="row irr"><span class="es">ser / estar</span><span class="de">sein</span></div>
+    <div class="row irr"><span class="es">tener</span><span class="de">haben</span></div>
+    <div class="row irr"><span class="es">hacer</span><span class="de">machen / tun</span></div>
+    <div class="row irr"><span class="es">ir</span><span class="de">gehen / fahren</span></div>
+    <div class="row irr"><span class="es">venir</span><span class="de">kommen</span></div>
+    <div class="row irr"><span class="es">decir</span><span class="de">sagen</span></div>
+    <div class="row irr"><span class="es">ver</span><span class="de">sehen</span></div>
+    <div class="row irr"><span class="es">dar</span><span class="de">geben</span></div>
+    <div class="row irr"><span class="es">poder</span><span class="de">können</span></div>
+    <div class="row irr"><span class="es">querer</span><span class="de">wollen / mögen</span></div>
+    <div class="row irr"><span class="es">saber</span><span class="de">wissen</span></div>
+    <div class="row irr"><span class="es">poner(se)</span><span class="de">stellen / werden</span></div>
+  </div>
+
+  <h3><span class="dot"></span>Reise & Erlebnisse · <i>Un viaje a Perú</i></h3>
+  <div class="vlist">
+    <div class="row"><span class="es">viajar</span><span class="de">reisen</span></div>
+    <div class="row"><span class="es">visitar</span><span class="de">besuchen</span></div>
+    <div class="row"><span class="es">descubrir</span><span class="de">entdecken</span></div>
+    <div class="row irr"><span class="es">conocer</span><span class="de">kennenlernen</span></div>
+    <div class="row irr"><span class="es">llegar</span><span class="de">ankommen</span></div>
+    <div class="row irr"><span class="es">salir</span><span class="de">hinausgehen / abfahren</span></div>
+    <div class="row irr"><span class="es">volver</span><span class="de">zurückkehren</span></div>
+    <div class="row"><span class="es">quedarse</span><span class="de">bleiben</span></div>
+    <div class="row"><span class="es">alojarse</span><span class="de">übernachten</span></div>
+    <div class="row"><span class="es">recorrer</span><span class="de">bereisen / durchqueren</span></div>
+    <div class="row"><span class="es">disfrutar (de)</span><span class="de">genießen</span></div>
+    <div class="row"><span class="es">probar</span><span class="de">probieren / kosten</span></div>
+    <div class="row irr"><span class="es">sacar fotos</span><span class="de">Fotos machen</span></div>
+    <div class="row irr"><span class="es">perderse</span><span class="de">sich verirren</span></div>
+    <div class="row"><span class="es">aprender</span><span class="de">lernen</span></div>
+  </div>
+
+  <h3><span class="dot"></span>Tourismus & Umwelt · <i>turismo sostenible</i></h3>
+  <div class="vlist">
+    <div class="row"><span class="es">contaminar</span><span class="de">verschmutzen</span></div>
+    <div class="row"><span class="es">proteger</span><span class="de">schützen</span></div>
+    <div class="row"><span class="es">cuidar (de)</span><span class="de">pflegen / sich kümmern</span></div>
+    <div class="row irr"><span class="es">construir</span><span class="de">bauen</span></div>
+    <div class="row irr"><span class="es">destruir</span><span class="de">zerstören</span></div>
+    <div class="row"><span class="es">conservar</span><span class="de">bewahren</span></div>
+    <div class="row"><span class="es">reciclar</span><span class="de">recyceln</span></div>
+    <div class="row"><span class="es">consumir</span><span class="de">verbrauchen</span></div>
+    <div class="row"><span class="es">desarrollar</span><span class="de">entwickeln</span></div>
+    <div class="row"><span class="es">evitar</span><span class="de">vermeiden</span></div>
+    <div class="row"><span class="es">aumentar</span><span class="de">zunehmen / steigen</span></div>
+    <div class="row"><span class="es">disminuir</span><span class="de">abnehmen / sinken</span></div>
+    <div class="row"><span class="es">describir</span><span class="de">beschreiben</span></div>
+    <div class="row"><span class="es">interesarse (por)</span><span class="de">sich interessieren (für)</span></div>
+  </div>
+</section>
+
+<!-- ================= QUIZ ================= -->
+<section class="tab quiz" id="quiz">
+  <div class="eyebrow2">¡A practicar!</div>
+  <h2>Mini-<em>Quiz</em></h2>
+  <p class="lead">Denk an die Form, dann aufdecken. 10 Fragen quer durch beide Zeiten.</p>
+
+  <div class="q"><div class="ask"><span class="pill">indefinido</span><b>hablar</b> – yo</div><button class="show-a" onclick="rev(this)">Lösung</button><div class="ans"><b>hablé</b> (Akzent auf yo!)</div></div>
+  <div class="q"><div class="ask"><span class="pill">indefinido</span><b>tener</b> – él</div><button class="show-a" onclick="rev(this)">Lösung</button><div class="ans"><b>tuvo</b> (Stamm tuv- · ohne Akzent)</div></div>
+  <div class="q"><div class="ask"><span class="pill">indefinido</span><b>ir</b> – nosotros</div><button class="show-a" onclick="rev(this)">Lösung</button><div class="ans"><b>fuimos</b> (ir = ser im indefinido)</div></div>
+  <div class="q"><div class="ask"><span class="pill">indefinido</span><b>hacer</b> – ella</div><button class="show-a" onclick="rev(this)">Lösung</button><div class="ans"><b>hizo</b> (mit z!)</div></div>
+  <div class="q"><div class="ask"><span class="pill">indefinido</span><b>llegar</b> – yo</div><button class="show-a" onclick="rev(this)">Lösung</button><div class="ans"><b>llegué</b> (g → gu)</div></div>
+  <div class="q"><div class="ask"><span class="pill">indefinido</span><b>dormir</b> – él</div><button class="show-a" onclick="rev(this)">Lösung</button><div class="ans"><b>durmió</b> (o → u, 3. Person)</div></div>
+  <div class="q"><div class="ask"><span class="pill">indefinido</span><b>decir</b> – ellos</div><button class="show-a" onclick="rev(this)">Lösung</button><div class="ans"><b>dijeron</b> (-eron, nicht -ieron)</div></div>
+  <div class="q"><div class="ask"><span class="pill">imperfecto</span><b>ser</b> – ellos</div><button class="show-a" onclick="rev(this)">Lösung</button><div class="ans"><b>eran</b></div></div>
+  <div class="q"><div class="ask"><span class="pill">imperfecto</span><b>vivir</b> – yo</div><button class="show-a" onclick="rev(this)">Lösung</button><div class="ans"><b>vivía</b></div></div>
+  <div class="q"><div class="ask"><span class="pill">imperfecto</span><b>ver</b> – nosotros</div><button class="show-a" onclick="rev(this)">Lösung</button><div class="ans"><b>veíamos</b></div></div>
+</section>
+
+</div>
+
+<footer>Hecho para <b>Erik</b> · Quelle: Cornelsen §47–48 & §54 · <b>¡Tú puedes!</b> 💪</footer>
+
+<script>
+  // Tabs
+  const tabs=document.querySelectorAll('#tabs button');
+  tabs.forEach(b=>b.addEventListener('click',()=>{
+    tabs.forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('section.tab').forEach(s=>s.classList.remove('show'));
+    b.classList.add('active');
+    document.getElementById(b.dataset.t).classList.add('show');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }));
+  // Quiz reveal
+  function rev(btn){const a=btn.nextElementSibling;a.classList.toggle('open');btn.textContent=a.classList.contains('open')?'Verstecken':'Lösung';}
+  // Self-test: tap blurred form to reveal
+  document.addEventListener('click',e=>{
+    if(document.body.classList.contains('hideforms')){
+      const t=e.target.closest('.end,.yo');
+      if(t) t.classList.toggle('reveal');
+    }
+  });
+</script>
+<script src="../../assets/core.js"></script>
+</body>
+</html>

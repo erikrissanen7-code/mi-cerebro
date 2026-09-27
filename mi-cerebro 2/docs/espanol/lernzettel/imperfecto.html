@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0E4744">
+<title>Pretérito imperfecto</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#FBF5E9;--paper2:#F4EAD6;--ink:#2B2419;--soft:#6B5E48;--teal:#156460;--teal-deep:#0E4744;--terra:#C9502B;--gold:#E0A02A;--card:#fff;--line:#E7DBC2;--ok:#1f7a4d;--warn:#9a6c08}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;padding-bottom:44px}
+.wrap{max-width:640px;margin:0 auto;padding:0 16px}
+header{background:linear-gradient(150deg,var(--teal-deep),var(--teal));color:#fff;padding:28px 16px 22px;border-bottom:4px solid var(--gold)}
+header .in{max-width:640px;margin:0 auto}
+header h1{font-family:'Fraunces',serif;font-weight:600;font-size:1.6rem;line-height:1.15}
+header p{font-size:.86rem;opacity:.92;margin-top:5px}
+section{padding:24px 0 2px}
+h2{font-family:'Fraunces',serif;font-weight:600;font-size:1.2rem;margin-bottom:3px;color:var(--teal-deep)}
+h3{font-size:.93rem;font-weight:700;color:var(--teal-deep);margin:14px 0 5px}
+.sub{color:var(--soft);font-size:.85rem;margin-bottom:12px}
+p{font-size:.9rem;margin-bottom:9px}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:.86rem;margin-bottom:10px}
+th{background:var(--paper2);color:var(--teal-deep);text-align:left;padding:8px 11px;font-weight:700;font-size:.82rem}
+td{padding:7px 11px;border-top:1px solid var(--line);vertical-align:top}
+td.k{font-weight:600;color:var(--teal-deep);white-space:nowrap}
+.hl{color:var(--terra);font-weight:700}
+.box{border-radius:12px;padding:13px 15px;font-size:.88rem;margin-bottom:11px}
+.rule{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--teal)}
+.tip{background:#FBEFD9;border-left:4px solid var(--gold);color:#5c4408}
+.tip b{color:var(--warn)}
+.warn{background:#FBE0D6;border-left:4px solid var(--terra);color:#7a2f16}
+.ok{background:#E3F2EA;border-left:4px solid var(--ok);color:#15532f}
+.big{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:600;color:var(--teal-deep);text-align:center;padding:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:11px;line-height:1.4}
+ul,ol{margin:0 0 10px 19px;font-size:.89rem}
+li{margin:3px 0}
+.q{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:9px}
+.q .txt{font-size:.9rem;margin-bottom:9px}
+.q .opts{display:flex;flex-wrap:wrap;gap:7px}
+.q .opts button{border:1px solid var(--line);background:var(--paper);color:var(--ink);font-family:inherit;font-size:.85rem;font-weight:600;border-radius:9px;padding:8px 13px;cursor:pointer}
+.q .opts button.right{background:#E3F2EA;border-color:var(--ok);color:var(--ok)}
+.q .opts button.wrong{background:#FBE0D6;border-color:var(--terra);color:var(--terra)}
+.q .fb{font-size:.83rem;color:var(--soft);margin-top:9px;display:none}
+.q.answered .fb{display:block}
+.score{position:sticky;bottom:10px;background:var(--teal-deep);color:#fff;border-radius:12px;padding:11px 15px;font-size:.87rem;font-weight:600;display:flex;justify-content:space-between;margin-top:14px}
+.score button{border:none;background:rgba(255,255,255,.18);color:#fff;font-family:inherit;font-weight:600;font-size:.8rem;border-radius:8px;padding:5px 11px;cursor:pointer}
+footer{text-align:center;color:var(--soft);font-size:.78rem;padding:26px 16px 8px}
+footer b{color:var(--teal-deep)}
+button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---------- nur für den Ausdruck ---------- */
+#printquiz{display:none}
+.pq{border:1px solid var(--line);border-radius:10px;padding:10px 13px;margin-bottom:8px;background:var(--card)}
+.pq .pt{font-size:.88rem;font-weight:600;margin-bottom:4px}
+.pq .pa{font-size:.86rem;color:var(--ok);font-weight:600}
+.pq .pf{font-size:.8rem;color:var(--soft);margin-top:3px}
+@media print{
+  body{background:#fff;padding:0}
+  header{background:var(--teal-deep)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .wrap{max-width:100%}
+  #quiz,.score{display:none!important}
+  #printquiz{display:block}
+  section{page-break-inside:auto}
+  table,.box,.big,.rule,.pq{page-break-inside:avoid}
+  h2{page-break-after:avoid}
+  th,td,.box,.big{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+.backbar{position:sticky;top:0;z-index:99;background:#FBF5E9;border-bottom:1px solid #E7DBC2;padding:9px 16px}.backbar a{color:#0E4744;text-decoration:none;font-weight:600;font-size:.86rem}
+</style>
+</head>
+<body>
+<div class="backbar"><a href="../grammatik.html">&larr; Grammatik</a></div>
+<header><div class="in"><h1>Pretérito imperfecto</h1><p>Die Zeitform für „früher“ — Formen, Gebrauch, Signalwörter und der antes/hoy-Aufgabentyp.</p></div></header>
+<div class="wrap">
+
+<section>
+  <h2>Wozu das Ganze?</h2>
+  <p>Das <b>pretérito imperfecto</b> ist die Zeitform für <b>früher</b>. Immer wenn du beschreibst, wie es <i>damals war</i>, wie es <i>immer</i> lief oder was <i>gerade im Gange</i> war, nimmst du imperfecto.</p>
+  <div class="big">Wie war es? Wie war es <span class="hl">immer</span>?<br>→ imperfecto</div>
+</section>
+
+<section>
+  <h2>Die Formen</h2>
+  <div class="sub">Nur zwei Endungs-Sets. Das ist alles.</div>
+
+  <h3>-ar-Verben (hablar)</h3>
+  <table>
+    <tr><th>Person</th><th>Form</th><th>Endung</th></tr>
+    <tr><td class="k">yo</td><td>habl<span class="hl">aba</span></td><td>-aba</td></tr>
+    <tr><td class="k">tú</td><td>habl<span class="hl">abas</span></td><td>-abas</td></tr>
+    <tr><td class="k">él / ella / usted</td><td>habl<span class="hl">aba</span></td><td>-aba</td></tr>
+    <tr><td class="k">nosotros</td><td>habl<span class="hl">ábamos</span></td><td>-ábamos</td></tr>
+    <tr><td class="k">vosotros</td><td>habl<span class="hl">abais</span></td><td>-abais</td></tr>
+    <tr><td class="k">ellos / ustedes</td><td>habl<span class="hl">aban</span></td><td>-aban</td></tr>
+  </table>
+
+  <h3>-er- und -ir-Verben (comer / vivir)</h3>
+  <table>
+    <tr><th>Person</th><th>comer</th><th>vivir</th></tr>
+    <tr><td class="k">yo</td><td>com<span class="hl">ía</span></td><td>viv<span class="hl">ía</span></td></tr>
+    <tr><td class="k">tú</td><td>com<span class="hl">ías</span></td><td>viv<span class="hl">ías</span></td></tr>
+    <tr><td class="k">él / ella</td><td>com<span class="hl">ía</span></td><td>viv<span class="hl">ía</span></td></tr>
+    <tr><td class="k">nosotros</td><td>com<span class="hl">íamos</span></td><td>viv<span class="hl">íamos</span></td></tr>
+    <tr><td class="k">vosotros</td><td>com<span class="hl">íais</span></td><td>viv<span class="hl">íais</span></td></tr>
+    <tr><td class="k">ellos</td><td>com<span class="hl">ían</span></td><td>viv<span class="hl">ían</span></td></tr>
+  </table>
+
+  <div class="tip"><b>Eselsbrücke:</b> <b>-ar</b> bekommt <b>A</b>-Endungen (-aba), <b>-er/-ir</b> bekommen <b>I</b>-Endungen (-ía).
+  Und: <i>yo</i> und <i>él</i> sind <b>immer gleich</b> — deshalb steht beim imperfecto oft das Pronomen dabei.</div>
+
+  <h3>Nur drei unregelmäßige Verben</h3>
+  <table>
+    <tr><th></th><th>ser (sein)</th><th>ir (gehen)</th><th>ver (sehen)</th></tr>
+    <tr><td class="k">yo</td><td>era</td><td>iba</td><td>veía</td></tr>
+    <tr><td class="k">tú</td><td>eras</td><td>ibas</td><td>veías</td></tr>
+    <tr><td class="k">él / ella</td><td>era</td><td>iba</td><td>veía</td></tr>
+    <tr><td class="k">nosotros</td><td>éramos</td><td>íbamos</td><td>veíamos</td></tr>
+    <tr><td class="k">vosotros</td><td>erais</td><td>ibais</td><td>veíais</td></tr>
+    <tr><td class="k">ellos</td><td>eran</td><td>iban</td><td>veían</td></tr>
+  </table>
+  <div class="ok">Drei Ausreißer, sonst keine. Im indefinido sind es über zwanzig — das imperfecto ist die <b>einfachere</b> Vergangenheit.</div>
+
+  <h3>hay → había</h3>
+  <p><b>había</b> ist immer gleich, egal ob eins oder viele:<br>
+  <i>Antes no <b>había</b> tráfico.</i> · <i>Antes no <b>había</b> tantos turistas.</i></p>
+</section>
+
+<section>
+  <h2>Wann benutzt du es?</h2>
+  <table>
+    <tr><th>Fall</th><th>Beispiel</th></tr>
+    <tr><td class="k">Beschreibung früher</td><td>El pueblo <b>era</b> muy tranquilo.</td></tr>
+    <tr><td class="k">Gewohnheit</td><td>Todos los días <b>íbamos</b> a la playa.</td></tr>
+    <tr><td class="k">Alter</td><td>Cuando <b>tenía</b> 14 años…</td></tr>
+    <tr><td class="k">Uhrzeit / Wetter</td><td><b>Eran</b> las ocho. <b>Hacía</b> calor.</td></tr>
+    <tr><td class="k">Gefühl, Zustand</td><td>Mis padres <b>estaban</b> contentos.</td></tr>
+    <tr><td class="k">Zwei Dinge gleichzeitig</td><td>Mientras yo <b>cocinaba</b>, él <b>leía</b>.</td></tr>
+  </table>
+
+  <h3>Signalwörter</h3>
+  <p><b>antes</b> · <b>en aquel entonces</b> (damals) · <b>en aquellos años</b> · <b>en los años setenta</b> ·
+  <b>todos los días</b> · <b>siempre</b> · <b>normalmente</b> · <b>cuando era pequeño</b> · <b>mientras</b> · <b>de niño</b></p>
+  <div class="tip"><b>Klausur-Trick:</b> Steht <i>antes</i>, <i>siempre</i> oder <i>todos los días</i> im Satz, ist es fast immer imperfecto.</div>
+</section>
+
+<section>
+  <h2>Antes ↔ Hoy — der Aufgabentyp aus deinem Blatt</h2>
+  <p>Viele Übungen bauen denselben Satz: eine Hälfte <b>heute</b> (presente), eine Hälfte <b>früher</b> (imperfecto).</p>
+  <div class="rule">
+    <b>Hoy</b> casi toda la gente <b>tiene</b> móviles, <b>pero</b> cuando mis padres <b>eran</b> jóvenes solo <b>tenían</b> un teléfono en casa.
+  </div>
+  <p>Das Wort <b>pero</b> ist der Umschaltpunkt. Links presente, rechts imperfecto — oder umgekehrt, je nachdem wo <i>antes</i> steht.</p>
+  <div class="warn"><b>Der häufigste Fehler:</b> Man setzt <i>beide</i> Hälften in dieselbe Zeit. Frag dich bei jeder Lücke einzeln:
+  Ist dieser Teil <b>heute</b> oder <b>früher</b>?</div>
+</section>
+
+<section>
+  <h2>Imperfecto oder Indefinido?</h2>
+  <table>
+    <tr><th>imperfecto</th><th>indefinido</th></tr>
+    <tr><td>Wie war es? Hintergrund</td><td>Was geschah? Ereignis</td></tr>
+    <tr><td>immer, oft, jeden Tag</td><td>einmal, plötzlich, dann</td></tr>
+    <tr><td>kein Ende erkennbar</td><td>abgeschlossen</td></tr>
+    <tr><td><i>Yo <b>tenía</b> 14 años…</i></td><td><i>…y mis padres <b>pusieron</b> una condición.</i></td></tr>
+  </table>
+  <div class="tip"><b>Bild dazu:</b> Das imperfecto ist die <b>Bühne</b> — indefinido ist, was <b>auf</b> der Bühne passiert.</div>
+</section>
+
+
+<section>
+  <h2>Selbsttest</h2>
+  <div class="sub">Erst tippen, dann weiterlesen. Falsche Antworten zeigen dir die Regel dazu.</div>
+  <div id="quiz"></div>
+  <div class="score"><span id="sc">0 von 10</span><button type="button" onclick="reset()">Nochmal</button></div>
+  <div id="printquiz"><div class="pq"><div class="pt">1. Antes en mi pueblo no ___ (haber) tráfico.</div><div class="pa">&rarr; había</div><div class="pf">había — bei „antes“ immer imperfecto, und había bleibt unverändert, auch bei Mehrzahl.</div></div>
+<div class="pq"><div class="pt">2. Cuando yo ___ (ser) pequeño, vivíamos en el campo.</div><div class="pa">&rarr; era</div><div class="pf">era — ser im imperfecto: era, eras, era, éramos, erais, eran.</div></div>
+<div class="pq"><div class="pt">3. Todos los domingos ___ (ir / nosotros) a la playa.</div><div class="pa">&rarr; íbamos</div><div class="pf">íbamos — Gewohnheit („todos los domingos“) und der Akzent auf dem í gehört dazu.</div></div>
+<div class="pq"><div class="pt">4. Hoy reciclamos la basura, pero en los años ochenta no la ___ .</div><div class="pa">&rarr; reciclábamos</div><div class="pf">reciclábamos — die zweite Hälfte spielt früher, also imperfecto.</div></div>
+<div class="pq"><div class="pt">5. Antes los hoteles ___ (cambiar) las toallas cada día.</div><div class="pa">&rarr; cambiaban</div><div class="pf">cambiaban — wiederholte Handlung in der Vergangenheit.</div></div>
+<div class="pq"><div class="pt">6. Welche Endung passt zu -er- und -ir-Verben?</div><div class="pa">&rarr; -ía</div><div class="pf">-ía. Nur -ar-Verben bekommen -aba.</div></div>
+<div class="pq"><div class="pt">7. Mis padres ___ (poner) una condición: viajar con mi padre.</div><div class="pa">&rarr; pusieron</div><div class="pf">pusieron — einmaliges, abgeschlossenes Ereignis → indefinido, nicht imperfecto.</div></div>
+<div class="pq"><div class="pt">8. Antes muy pocos españoles ___ (tener) coche.</div><div class="pa">&rarr; tenían</div><div class="pf">tenían — Zustand früher, Signalwort „antes“.</div></div>
+<div class="pq"><div class="pt">9. Welche drei Verben sind im imperfecto unregelmäßig?</div><div class="pa">&rarr; ser, ir, ver</div><div class="pf">ser (era), ir (iba), ver (veía) — sonst keine.</div></div>
+<div class="pq"><div class="pt">10. En aquel entonces ___ (construir / ellos) hoteles por toda la costa.</div><div class="pa">&rarr; construían</div><div class="pf">construían — „en aquel entonces“ (damals) beschreibt, wie es damals lief.</div></div></div>
+</section>
+</div>
+<footer>Unidad 8 · Andalucía · <b>mi cerebro</b></footer>
+<script>
+const Q=[{"t": "Antes en mi pueblo no ___ (haber) tráfico.", "o": ["hubo", "había", "habían"], "a": 1, "f": "había — bei „antes“ immer imperfecto, und había bleibt unverändert, auch bei Mehrzahl."}, {"t": "Cuando yo ___ (ser) pequeño, vivíamos en el campo.", "o": ["fui", "era", "estaba"], "a": 1, "f": "era — ser im imperfecto: era, eras, era, éramos, erais, eran."}, {"t": "Todos los domingos ___ (ir / nosotros) a la playa.", "o": ["fuimos", "íbamos", "ibamos"], "a": 1, "f": "íbamos — Gewohnheit („todos los domingos“) und der Akzent auf dem í gehört dazu."}, {"t": "Hoy reciclamos la basura, pero en los años ochenta no la ___ .", "o": ["reciclamos", "reciclábamos", "reciclaron"], "a": 1, "f": "reciclábamos — die zweite Hälfte spielt früher, also imperfecto."}, {"t": "Antes los hoteles ___ (cambiar) las toallas cada día.", "o": ["cambiaban", "cambiaron", "cambian"], "a": 0, "f": "cambiaban — wiederholte Handlung in der Vergangenheit."}, {"t": "Welche Endung passt zu -er- und -ir-Verben?", "o": ["-aba", "-ía", "-ió"], "a": 1, "f": "-ía. Nur -ar-Verben bekommen -aba."}, {"t": "Mis padres ___ (poner) una condición: viajar con mi padre.", "o": ["ponían", "pusieron", "ponen"], "a": 1, "f": "pusieron — einmaliges, abgeschlossenes Ereignis → indefinido, nicht imperfecto."}, {"t": "Antes muy pocos españoles ___ (tener) coche.", "o": ["tuvieron", "tenían", "tienen"], "a": 1, "f": "tenían — Zustand früher, Signalwort „antes“."}, {"t": "Welche drei Verben sind im imperfecto unregelmäßig?", "o": ["ser, ir, ver", "tener, hacer, poder", "ser, estar, ir"], "a": 0, "f": "ser (era), ir (iba), ver (veía) — sonst keine."}, {"t": "En aquel entonces ___ (construir / ellos) hoteles por toda la costa.", "o": ["construyeron", "construían", "construyen"], "a": 1, "f": "construían — „en aquel entonces“ (damals) beschreibt, wie es damals lief."}];
+let done=0,right=0;
+function render(){
+  document.getElementById('quiz').innerHTML=Q.map((q,i)=>
+    '<div class="q" id="q'+i+'"><div class="txt">'+q.t+'</div><div class="opts">'
+    + q.o.map((o,j)=>'<button type="button" onclick="pick('+i+','+j+')">'+o+'</button>').join('')
+    + '</div><div class="fb">'+q.f+'</div></div>').join('');
+  done=0;right=0;upd();
+}
+function pick(i,j){
+  const el=document.getElementById('q'+i);
+  if(el.classList.contains('answered'))return;
+  el.classList.add('answered');
+  const bs=el.querySelectorAll('.opts button');
+  bs[j].classList.add(j===Q[i].a?'right':'wrong');
+  if(j!==Q[i].a)bs[Q[i].a].classList.add('right');
+  done++; if(j===Q[i].a)right++;
+  upd();
+}
+function upd(){
+  const s=document.getElementById('sc');
+  s.textContent=right+' von '+Q.length+(done===Q.length?(right/Q.length>=.8?'  ✓ sitzt':'  – nochmal ansehen'):'');
+}
+function reset(){render();window.scrollTo({top:0,behavior:'smooth'})}
+render();
+</script>
+</body>
+</html>

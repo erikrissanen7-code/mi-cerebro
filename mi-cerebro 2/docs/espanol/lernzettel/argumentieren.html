@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0E4744">
+<title>Argumentieren &amp; Satzbau</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#FBF5E9;--paper2:#F4EAD6;--ink:#2B2419;--soft:#6B5E48;--teal:#156460;--teal-deep:#0E4744;--terra:#C9502B;--gold:#E0A02A;--card:#fff;--line:#E7DBC2;--ok:#1f7a4d;--warn:#9a6c08}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;padding-bottom:44px}
+.wrap{max-width:640px;margin:0 auto;padding:0 16px}
+header{background:linear-gradient(150deg,var(--teal-deep),var(--teal));color:#fff;padding:28px 16px 22px;border-bottom:4px solid var(--gold)}
+header .in{max-width:640px;margin:0 auto}
+header h1{font-family:'Fraunces',serif;font-weight:600;font-size:1.6rem;line-height:1.15}
+header p{font-size:.86rem;opacity:.92;margin-top:5px}
+section{padding:24px 0 2px}
+h2{font-family:'Fraunces',serif;font-weight:600;font-size:1.2rem;margin-bottom:3px;color:var(--teal-deep)}
+h3{font-size:.93rem;font-weight:700;color:var(--teal-deep);margin:14px 0 5px}
+.sub{color:var(--soft);font-size:.85rem;margin-bottom:12px}
+p{font-size:.9rem;margin-bottom:9px}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:.86rem;margin-bottom:10px}
+th{background:var(--paper2);color:var(--teal-deep);text-align:left;padding:8px 11px;font-weight:700;font-size:.82rem}
+td{padding:7px 11px;border-top:1px solid var(--line);vertical-align:top}
+td.k{font-weight:600;color:var(--teal-deep);white-space:nowrap}
+.hl{color:var(--terra);font-weight:700}
+.box{border-radius:12px;padding:13px 15px;font-size:.88rem;margin-bottom:11px}
+.rule{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--teal)}
+.tip{background:#FBEFD9;border-left:4px solid var(--gold);color:#5c4408}
+.tip b{color:var(--warn)}
+.warn{background:#FBE0D6;border-left:4px solid var(--terra);color:#7a2f16}
+.ok{background:#E3F2EA;border-left:4px solid var(--ok);color:#15532f}
+.big{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:600;color:var(--teal-deep);text-align:center;padding:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:11px;line-height:1.4}
+ul,ol{margin:0 0 10px 19px;font-size:.89rem}
+li{margin:3px 0}
+.q{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:9px}
+.q .txt{font-size:.9rem;margin-bottom:9px}
+.q .opts{display:flex;flex-wrap:wrap;gap:7px}
+.q .opts button{border:1px solid var(--line);background:var(--paper);color:var(--ink);font-family:inherit;font-size:.85rem;font-weight:600;border-radius:9px;padding:8px 13px;cursor:pointer}
+.q .opts button.right{background:#E3F2EA;border-color:var(--ok);color:var(--ok)}
+.q .opts button.wrong{background:#FBE0D6;border-color:var(--terra);color:var(--terra)}
+.q .fb{font-size:.83rem;color:var(--soft);margin-top:9px;display:none}
+.q.answered .fb{display:block}
+.score{position:sticky;bottom:10px;background:var(--teal-deep);color:#fff;border-radius:12px;padding:11px 15px;font-size:.87rem;font-weight:600;display:flex;justify-content:space-between;margin-top:14px}
+.score button{border:none;background:rgba(255,255,255,.18);color:#fff;font-family:inherit;font-weight:600;font-size:.8rem;border-radius:8px;padding:5px 11px;cursor:pointer}
+footer{text-align:center;color:var(--soft);font-size:.78rem;padding:26px 16px 8px}
+footer b{color:var(--teal-deep)}
+button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---------- nur für den Ausdruck ---------- */
+#printquiz{display:none}
+.pq{border:1px solid var(--line);border-radius:10px;padding:10px 13px;margin-bottom:8px;background:var(--card)}
+.pq .pt{font-size:.88rem;font-weight:600;margin-bottom:4px}
+.pq .pa{font-size:.86rem;color:var(--ok);font-weight:600}
+.pq .pf{font-size:.8rem;color:var(--soft);margin-top:3px}
+@media print{
+  body{background:#fff;padding:0}
+  header{background:var(--teal-deep)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .wrap{max-width:100%}
+  #quiz,.score{display:none!important}
+  #printquiz{display:block}
+  section{page-break-inside:auto}
+  table,.box,.big,.rule,.pq{page-break-inside:avoid}
+  h2{page-break-after:avoid}
+  th,td,.box,.big{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+.backbar{position:sticky;top:0;z-index:99;background:#FBF5E9;border-bottom:1px solid #E7DBC2;padding:9px 16px}.backbar a{color:#0E4744;text-decoration:none;font-weight:600;font-size:.86rem}
+</style>
+</head>
+<body>
+<div class="backbar"><a href="../grammatik.html">&larr; Grammatik</a></div>
+<header><div class="in"><h1>Argumentieren &amp; Satzbau</h1><p>Meinung äußern, begründen, abwägen — die Bausteine für jede Schreibaufgabe.</p></div></header>
+<div class="wrap">
+
+<section>
+  <h2>Wofür du das brauchst</h2>
+  <p>Drei Aufgabentypen verlangen dasselbe Werkzeug: die Eltern überzeugen (13c), Argumente für und gegen den Abenteuertourismus sammeln (13a) und erklären, welcher Tourist du bist (8b).</p>
+  <div class="big">Meinung + <span class="hl">porque</span> + Begründung<br>= ein vollständiges Argument</div>
+  <div class="warn"><b>Der Punkteklau in Klausuren:</b> Eine Meinung ohne <i>porque</i> zählt halb.
+  Jeder Satz, den du schreibst, sollte eine Begründung dranhängen haben.</div>
+</section>
+
+<section>
+  <h2>Meinung äußern</h2>
+  <table>
+    <tr><th>Español</th><th>Deutsch</th></tr>
+    <tr><td class="k">Creo que…</td><td>Ich glaube, dass…</td></tr>
+    <tr><td class="k">Pienso que…</td><td>Ich denke, dass…</td></tr>
+    <tr><td class="k">Para mí…</td><td>Für mich…</td></tr>
+    <tr><td class="k">En mi opinión…</td><td>Meiner Meinung nach…</td></tr>
+    <tr><td class="k">Me parece que…</td><td>Es scheint mir, dass…</td></tr>
+    <tr><td class="k">Estoy seguro/-a de que…</td><td>Ich bin sicher, dass…</td></tr>
+    <tr><td class="k">Estoy a favor de…</td><td>Ich bin für…</td></tr>
+    <tr><td class="k">Estoy en contra de…</td><td>Ich bin gegen…</td></tr>
+    <tr><td class="k">Lo importante para mí es…</td><td>Wichtig ist für mich…</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>Verbinden statt aneinanderreihen</h2>
+  <div class="sub">Das ist der Unterschied zwischen 8 und 12 Punkten im Ausdruck.</div>
+  <table>
+    <tr><th>Español</th><th>Deutsch</th><th>wofür</th></tr>
+    <tr><td class="k">porque</td><td>weil</td><td>Begründung</td></tr>
+    <tr><td class="k">por eso</td><td>deshalb</td><td>Folge</td></tr>
+    <tr><td class="k">además</td><td>außerdem</td><td>zweites Argument</td></tr>
+    <tr><td class="k">también</td><td>auch</td><td>ergänzen</td></tr>
+    <tr><td class="k">pero</td><td>aber</td><td>Gegensatz</td></tr>
+    <tr><td class="k">sin embargo</td><td>jedoch</td><td>starker Gegensatz</td></tr>
+    <tr><td class="k">aunque</td><td>obwohl</td><td>Einschränkung</td></tr>
+    <tr><td class="k">es verdad que…, pero…</td><td>es stimmt, dass…, aber…</td><td>Einwand entkräften</td></tr>
+    <tr><td class="k">por un lado… por otro lado…</td><td>einerseits… andererseits…</td><td>abwägen</td></tr>
+    <tr><td class="k">en primer lugar</td><td>erstens</td><td>gliedern</td></tr>
+    <tr><td class="k">al final</td><td>schließlich</td><td>Schluss</td></tr>
+  </table>
+  <div class="tip"><b>Mach es dir einfach:</b> Wähle drei Verbindungswörter und benutze sie in jedem Text.
+  <b>porque</b>, <b>además</b> und <b>pero</b> reichen für eine solide Note.</div>
+</section>
+
+<section>
+  <h2>Argumente dafür und dagegen</h2>
+  <h3>A favor del turismo de aventura</h3>
+  <ul>
+    <li>Conoces a gente interesante durante las actividades.</li>
+    <li>Puedes olvidar el trabajo y estar activo.</li>
+    <li>Es superdivertido y aprendes cosas nuevas.</li>
+    <li>Estás en la naturaleza y no en un hotel sin hacer nada.</li>
+  </ul>
+  <h3>En contra</h3>
+  <ul>
+    <li>Es muy malo para la naturaleza: se ensucian los ríos y se talan árboles.</li>
+    <li>Es peligroso y muy caro.</li>
+    <li>Los turistas dejan sus papeles en el campo.</li>
+    <li>Ahora hay menos animales que antes.</li>
+  </ul>
+  <div class="ok"><b>Ausgewogen schließen</b> bringt Punkte:<br>
+  <i>Hay que pensar cómo se puede ganar dinero con el turismo y además cuidar de la naturaleza.</i></div>
+</section>
+
+<section>
+  <h2>Eltern überzeugen (Aufgabe 13 c)</h2>
+  <div class="sub">Ein Gerüst, das du mit deinen eigenen Wörtern füllst.</div>
+  <div class="rule">
+  <b>1 · Einstieg</b><br><i>Quiero irme de vacaciones solo porque…</i><br><br>
+  <b>2 · Beispiel Albert</b><br><i>Albert Casals empezó a viajar a los 15 años y sus padres estaban contentos.</i><br><br>
+  <b>3 · Einwand vorwegnehmen</b><br><i>Es verdad que puede ser peligroso, pero siempre hay gente que ayuda.</i><br><br>
+  <b>4 · Zweites Argument</b><br><i>Además aprendo cosas útiles y conozco a gente nueva.</i><br><br>
+  <b>5 · Schluss</b><br><i>Por eso creo que es una buena idea para mí.</i>
+  </div>
+  <div class="tip"><b>Schreibtipp:</b> Fünf kurze, richtige Sätze sind mehr wert als zwei lange, schiefe.
+  Bau nie einen Satz, dessen Grammatik du nicht sicher beherrschst.</div>
+</section>
+
+<section>
+  <h2>Welcher Tourist bist du?</h2>
+  <div class="rule">
+  <i>Creo que soy un turista <b>activo</b> porque me encanta el deporte y no me gusta estar sentado.
+  Me gusta hacer senderismo y escalar. Además prefiero un alojamiento sencillo, porque solo estoy ahí para dormir.
+  Pero también me interesan los lugares históricos, por eso a veces hago turismo cultural.</i>
+  </div>
+  <p>Vier Sätze, drei Verbindungswörter, zwei Begründungen. Genau dieses Muster kannst du für jede Frage dieser Art benutzen.</p>
+</section>
+
+
+<section>
+  <h2>Selbsttest</h2>
+  <div class="sub">Erst tippen, dann weiterlesen. Falsche Antworten zeigen dir die Regel dazu.</div>
+  <div id="quiz"></div>
+  <div class="score"><span id="sc">0 von 7</span><button type="button" onclick="reset()">Nochmal</button></div>
+  <div id="printquiz"><div class="pq"><div class="pt">1. Was fehlt in diesem Satz? „Prefiero el turismo activo.“</div><div class="pa">&rarr; eine Begründung mit porque</div><div class="pf">Eine Begründung. Meinung ohne porque ist nur die halbe Antwort.</div></div>
+<div class="pq"><div class="pt">2. „Ich bin gegen diese Art von Tourismus.“</div><div class="pa">&rarr; Estoy en contra de…</div><div class="pf">Estoy en contra de — a favor de heißt dafür.</div></div>
+<div class="pq"><div class="pt">3. Welches Wort leitet eine Folge ein (deshalb)?</div><div class="pa">&rarr; por eso</div><div class="pf">por eso. porque = weil (Grund), por eso = deshalb (Folge).</div></div>
+<div class="pq"><div class="pt">4. „Es stimmt, dass es teuer ist, aber…“</div><div class="pa">&rarr; Es verdad que es caro, pero…</div><div class="pf">Es verdad que…, pero… — damit entkräftest du einen Einwand. Sehr stark in Argumentationen.</div></div>
+<div class="pq"><div class="pt">5. Welche Verbindung passt: „Es peligroso ___ es muy caro.“ (beides Nachteile)</div><div class="pa">&rarr; además</div><div class="pf">además (außerdem) — du fügst ein zweites Argument derselben Seite hinzu.</div></div>
+<div class="pq"><div class="pt">6. „einerseits … andererseits …“</div><div class="pa">&rarr; por un lado… por otro lado…</div><div class="pf">por un lado… por otro lado… — perfekt zum Abwägen.</div></div>
+<div class="pq"><div class="pt">7. Welcher Satz ist in einer Klausur am stärksten?</div><div class="pa">&rarr; Me gusta el turismo activo porque puedo estar activo todo el rato.</div><div class="pf">Der mittlere: Meinung + Begründung + passender Wortschatz aus der Unidad.</div></div></div>
+</section>
+</div>
+<footer>Unidad 6 + 8 · Ausdruck · <b>mi cerebro</b></footer>
+<script>
+const Q=[{"t": "Was fehlt in diesem Satz? „Prefiero el turismo activo.“", "o": ["nichts", "eine Begründung mit porque", "ein zweites Verb"], "a": 1, "f": "Eine Begründung. Meinung ohne porque ist nur die halbe Antwort."}, {"t": "„Ich bin gegen diese Art von Tourismus.“", "o": ["Estoy a favor de…", "Estoy en contra de…", "Me gusta…"], "a": 1, "f": "Estoy en contra de — a favor de heißt dafür."}, {"t": "Welches Wort leitet eine Folge ein (deshalb)?", "o": ["porque", "por eso", "aunque"], "a": 1, "f": "por eso. porque = weil (Grund), por eso = deshalb (Folge)."}, {"t": "„Es stimmt, dass es teuer ist, aber…“", "o": ["Es verdad que es caro, pero…", "Creo que es caro, porque…", "Además es caro…"], "a": 0, "f": "Es verdad que…, pero… — damit entkräftest du einen Einwand. Sehr stark in Argumentationen."}, {"t": "Welche Verbindung passt: „Es peligroso ___ es muy caro.“ (beides Nachteile)", "o": ["pero", "además", "sin embargo"], "a": 1, "f": "además (außerdem) — du fügst ein zweites Argument derselben Seite hinzu."}, {"t": "„einerseits … andererseits …“", "o": ["en primer lugar… al final…", "por un lado… por otro lado…", "también… además…"], "a": 1, "f": "por un lado… por otro lado… — perfekt zum Abwägen."}, {"t": "Welcher Satz ist in einer Klausur am stärksten?", "o": ["Me gusta el turismo activo.", "Me gusta el turismo activo porque puedo estar activo todo el rato.", "El turismo activo es bueno."], "a": 1, "f": "Der mittlere: Meinung + Begründung + passender Wortschatz aus der Unidad."}];
+let done=0,right=0;
+function render(){
+  document.getElementById('quiz').innerHTML=Q.map((q,i)=>
+    '<div class="q" id="q'+i+'"><div class="txt">'+q.t+'</div><div class="opts">'
+    + q.o.map((o,j)=>'<button type="button" onclick="pick('+i+','+j+')">'+o+'</button>').join('')
+    + '</div><div class="fb">'+q.f+'</div></div>').join('');
+  done=0;right=0;upd();
+}
+function pick(i,j){
+  const el=document.getElementById('q'+i);
+  if(el.classList.contains('answered'))return;
+  el.classList.add('answered');
+  const bs=el.querySelectorAll('.opts button');
+  bs[j].classList.add(j===Q[i].a?'right':'wrong');
+  if(j!==Q[i].a)bs[Q[i].a].classList.add('right');
+  done++; if(j===Q[i].a)right++;
+  upd();
+}
+function upd(){
+  const s=document.getElementById('sc');
+  s.textContent=right+' von '+Q.length+(done===Q.length?(right/Q.length>=.8?'  ✓ sitzt':'  – nochmal ansehen'):'');
+}
+function reset(){render();window.scrollTo({top:0,behavior:'smooth'})}
+render();
+</script>
+</body>
+</html>

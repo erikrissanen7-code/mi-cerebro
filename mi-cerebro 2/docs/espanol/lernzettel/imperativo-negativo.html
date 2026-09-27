@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0E4744">
+<title>Verneinter Imperativ</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#FBF5E9;--paper2:#F4EAD6;--ink:#2B2419;--soft:#6B5E48;--teal:#156460;--teal-deep:#0E4744;--terra:#C9502B;--gold:#E0A02A;--card:#fff;--line:#E7DBC2;--ok:#1f7a4d;--warn:#9a6c08}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.55;-webkit-font-smoothing:antialiased;padding-bottom:44px}
+.wrap{max-width:640px;margin:0 auto;padding:0 16px}
+header{background:linear-gradient(150deg,var(--teal-deep),var(--teal));color:#fff;padding:28px 16px 22px;border-bottom:4px solid var(--gold)}
+header .in{max-width:640px;margin:0 auto}
+header h1{font-family:'Fraunces',serif;font-weight:600;font-size:1.6rem;line-height:1.15}
+header p{font-size:.86rem;opacity:.92;margin-top:5px}
+section{padding:24px 0 2px}
+h2{font-family:'Fraunces',serif;font-weight:600;font-size:1.2rem;margin-bottom:3px;color:var(--teal-deep)}
+h3{font-size:.93rem;font-weight:700;color:var(--teal-deep);margin:14px 0 5px}
+.sub{color:var(--soft);font-size:.85rem;margin-bottom:12px}
+p{font-size:.9rem;margin-bottom:9px}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:.86rem;margin-bottom:10px}
+th{background:var(--paper2);color:var(--teal-deep);text-align:left;padding:8px 11px;font-weight:700;font-size:.82rem}
+td{padding:7px 11px;border-top:1px solid var(--line);vertical-align:top}
+td.k{font-weight:600;color:var(--teal-deep);white-space:nowrap}
+.hl{color:var(--terra);font-weight:700}
+.box{border-radius:12px;padding:13px 15px;font-size:.88rem;margin-bottom:11px}
+.rule{background:var(--card);border:1px solid var(--line);border-left:4px solid var(--teal)}
+.tip{background:#FBEFD9;border-left:4px solid var(--gold);color:#5c4408}
+.tip b{color:var(--warn)}
+.warn{background:#FBE0D6;border-left:4px solid var(--terra);color:#7a2f16}
+.ok{background:#E3F2EA;border-left:4px solid var(--ok);color:#15532f}
+.big{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:600;color:var(--teal-deep);text-align:center;padding:14px;background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:11px;line-height:1.4}
+ul,ol{margin:0 0 10px 19px;font-size:.89rem}
+li{margin:3px 0}
+.q{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:9px}
+.q .txt{font-size:.9rem;margin-bottom:9px}
+.q .opts{display:flex;flex-wrap:wrap;gap:7px}
+.q .opts button{border:1px solid var(--line);background:var(--paper);color:var(--ink);font-family:inherit;font-size:.85rem;font-weight:600;border-radius:9px;padding:8px 13px;cursor:pointer}
+.q .opts button.right{background:#E3F2EA;border-color:var(--ok);color:var(--ok)}
+.q .opts button.wrong{background:#FBE0D6;border-color:var(--terra);color:var(--terra)}
+.q .fb{font-size:.83rem;color:var(--soft);margin-top:9px;display:none}
+.q.answered .fb{display:block}
+.score{position:sticky;bottom:10px;background:var(--teal-deep);color:#fff;border-radius:12px;padding:11px 15px;font-size:.87rem;font-weight:600;display:flex;justify-content:space-between;margin-top:14px}
+.score button{border:none;background:rgba(255,255,255,.18);color:#fff;font-family:inherit;font-weight:600;font-size:.8rem;border-radius:8px;padding:5px 11px;cursor:pointer}
+footer{text-align:center;color:var(--soft);font-size:.78rem;padding:26px 16px 8px}
+footer b{color:var(--teal-deep)}
+button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+
+/* ---------- nur für den Ausdruck ---------- */
+#printquiz{display:none}
+.pq{border:1px solid var(--line);border-radius:10px;padding:10px 13px;margin-bottom:8px;background:var(--card)}
+.pq .pt{font-size:.88rem;font-weight:600;margin-bottom:4px}
+.pq .pa{font-size:.86rem;color:var(--ok);font-weight:600}
+.pq .pf{font-size:.8rem;color:var(--soft);margin-top:3px}
+@media print{
+  body{background:#fff;padding:0}
+  header{background:var(--teal-deep)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .wrap{max-width:100%}
+  #quiz,.score{display:none!important}
+  #printquiz{display:block}
+  section{page-break-inside:auto}
+  table,.box,.big,.rule,.pq{page-break-inside:avoid}
+  h2{page-break-after:avoid}
+  th,td,.box,.big{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+.backbar{position:sticky;top:0;z-index:99;background:#FBF5E9;border-bottom:1px solid #E7DBC2;padding:9px 16px}.backbar a{color:#0E4744;text-decoration:none;font-weight:600;font-size:.86rem}
+</style>
+</head>
+<body>
+<div class="backbar"><a href="../grammatik.html">&larr; Grammatik</a></div>
+<header><div class="in"><h1>Verneinter Imperativ</h1><p>„Tu das nicht!“ — die Bau-Regel in drei Schritten, plus fertige Sätze für die Verbotsschilder.</p></div></header>
+<div class="wrap">
+
+<section>
+  <h2>Worum geht es?</h2>
+  <p>Der <b>verneinte Imperativ</b> ist der „Tu das nicht!“-Befehl. Genau das brauchst du für die Verbotsschilder in Aufgabe 12.</p>
+  <div class="big">No <span class="hl">comas</span> aquí. → Iss hier nicht.</div>
+  <div class="warn">Achtung: Es ist <b>nicht</b> einfach „no“ + normaler Imperativ.
+  <i>¡Come!</i> heißt „Iss!“ — aber „Iss nicht!“ ist <b>No comas</b>, nicht <s>No come</s>.</div>
+</section>
+
+<section>
+  <h2>Die Bau-Regel in drei Schritten</h2>
+  <div class="rule">
+    <b>1.</b> Nimm die <b>yo</b>-Form im Präsens → <i>comer → com<b>o</b></i><br>
+    <b>2.</b> Streiche das <b>-o</b> → <i>com-</i><br>
+    <b>3.</b> Hänge die <b>Gegenteil-Endung</b> an → <i>com<b>as</b></i>
+  </div>
+
+  <table>
+    <tr><th>Verb auf…</th><th>bekommt…</th><th>Beispiel (tú)</th></tr>
+    <tr><td class="k">-ar</td><td><span class="hl">-es</span></td><td>hablar → no habl<b>es</b></td></tr>
+    <tr><td class="k">-er</td><td><span class="hl">-as</span></td><td>comer → no com<b>as</b></td></tr>
+    <tr><td class="k">-ir</td><td><span class="hl">-as</span></td><td>escribir → no escrib<b>as</b></td></tr>
+  </table>
+
+  <div class="tip"><b>Eselsbrücke „Endungstausch“:</b> Die Verben tauschen die Vokale.
+  A-Verben werden zu E, E/I-Verben werden zu A. Wie ein Platzwechsel.</div>
+
+  <h3>Für „ihr“ (vosotros)</h3>
+  <table>
+    <tr><th>-ar</th><th>-er / -ir</th></tr>
+    <tr><td>no habl<b>éis</b></td><td>no com<b>áis</b> / no escrib<b>áis</b></td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>Warum Schritt 1 so wichtig ist</h2>
+  <p>Weil unregelmäßige Verben ihre Unregelmäßigkeit <b>mitnehmen</b>. Du musst sie nicht extra lernen — du musst nur bei der <i>yo</i>-Form anfangen.</p>
+  <table>
+    <tr><th>Verb</th><th>yo-Form</th><th>verneint (tú)</th></tr>
+    <tr><td class="k">hacer</td><td>ha<b>g</b>o</td><td>no ha<b>gas</b></td></tr>
+    <tr><td class="k">poner</td><td>pon<b>g</b>o</td><td>no pon<b>gas</b></td></tr>
+    <tr><td class="k">venir</td><td>ven<b>g</b>o</td><td>no ven<b>gas</b></td></tr>
+    <tr><td class="k">tener</td><td>ten<b>g</b>o</td><td>no ten<b>gas</b></td></tr>
+    <tr><td class="k">decir</td><td>di<b>g</b>o</td><td>no di<b>gas</b></td></tr>
+    <tr><td class="k">salir</td><td>sal<b>g</b>o</td><td>no sal<b>gas</b></td></tr>
+  </table>
+
+  <h3>Vier echte Ausnahmen</h3>
+  <table>
+    <tr><th>Verb</th><th>tú</th><th>vosotros</th></tr>
+    <tr><td class="k">ser</td><td>no seas</td><td>no seáis</td></tr>
+    <tr><td class="k">ir</td><td>no vayas</td><td>no vayáis</td></tr>
+    <tr><td class="k">dar</td><td>no des</td><td>no deis</td></tr>
+    <tr><td class="k">estar</td><td>no estés</td><td>no estéis</td></tr>
+  </table>
+</section>
+
+<section>
+  <h2>Sätze für die Verbotsschilder</h2>
+  <div class="sub">Genau der Wortschatz, den Aufgabe 12 b) braucht.</div>
+  <table>
+    <tr><th>Schild</th><th>Satz</th></tr>
+    <tr><td class="k">Essen verboten</td><td>No comas aquí.</td></tr>
+    <tr><td class="k">Fotografieren verboten</td><td>No hagas fotos.</td></tr>
+    <tr><td class="k">Baden verboten</td><td>No nades aquí.</td></tr>
+    <tr><td class="k">Zelten verboten</td><td>No acampes en esta zona.</td></tr>
+    <tr><td class="k">Feuer verboten</td><td>No hagas fuego.</td></tr>
+    <tr><td class="k">Müll wegwerfen verboten</td><td>No tires la basura al suelo.</td></tr>
+    <tr><td class="k">Hunde verboten</td><td>No traigas perros.</td></tr>
+    <tr><td class="k">Musik verboten</td><td>No pongas música alta.</td></tr>
+    <tr><td class="k">Pflanzen pflücken verboten</td><td>No cojas flores.</td></tr>
+  </table>
+  <div class="tip"><b>Für Teil c) — Umwelt schützen:</b> Dieselbe Form, aber positiv gemeint:<br>
+  <i>No uses tanta agua. · No ensucies la playa. · No tires plástico al mar.</i></div>
+</section>
+
+
+<section>
+  <h2>Selbsttest</h2>
+  <div class="sub">Erst tippen, dann weiterlesen. Falsche Antworten zeigen dir die Regel dazu.</div>
+  <div id="quiz"></div>
+  <div class="score"><span id="sc">0 von 8</span><button type="button" onclick="reset()">Nochmal</button></div>
+  <div id="printquiz"><div class="pq"><div class="pt">1. „Iss hier nicht!“ (tú)</div><div class="pa">&rarr; No comas aquí.</div><div class="pf">No comas — comer ist ein -er-Verb, bekommt also -as.</div></div>
+<div class="pq"><div class="pt">2. „Sprich nicht so laut!“ (hablar)</div><div class="pa">&rarr; No hables</div><div class="pf">No hables — -ar-Verben bekommen -es.</div></div>
+<div class="pq"><div class="pt">3. „Mach kein Feuer!“ (hacer)</div><div class="pa">&rarr; No hagas fuego</div><div class="pf">No hagas — von der yo-Form hago, -o weg, -as dran.</div></div>
+<div class="pq"><div class="pt">4. Welcher Schritt kommt zuerst?</div><div class="pa">&rarr; yo-Form im Präsens nehmen</div><div class="pf">Die yo-Form. Nur so kommen unregelmäßige Stämme automatisch mit.</div></div>
+<div class="pq"><div class="pt">5. „Sei nicht so streng!“ (ser)</div><div class="pa">&rarr; No seas</div><div class="pf">No seas — ser ist eine der vier echten Ausnahmen.</div></div>
+<div class="pq"><div class="pt">6. „Geht nicht dorthin!“ (vosotros, ir)</div><div class="pa">&rarr; No vayáis</div><div class="pf">No vayáis — ir ist unregelmäßig, vosotros-Endung -áis.</div></div>
+<div class="pq"><div class="pt">7. escribir → verneinter Imperativ (tú)</div><div class="pa">&rarr; no escribas</div><div class="pf">no escribas — -ir-Verben bekommen wie -er-Verben die Endung -as.</div></div>
+<div class="pq"><div class="pt">8. „Wirf den Müll nicht auf den Boden!“ (tirar)</div><div class="pa">&rarr; No tires</div><div class="pf">No tires — tirar ist -ar, also -es.</div></div></div>
+</section>
+</div>
+<footer>Unidad 6 · No hagas esto ni lo otro · <b>mi cerebro</b></footer>
+<script>
+const Q=[{"t": "„Iss hier nicht!“ (tú)", "o": ["No come aquí.", "No comas aquí.", "No comes aquí."], "a": 1, "f": "No comas — comer ist ein -er-Verb, bekommt also -as."}, {"t": "„Sprich nicht so laut!“ (hablar)", "o": ["No hables", "No hablas", "No habla"], "a": 0, "f": "No hables — -ar-Verben bekommen -es."}, {"t": "„Mach kein Feuer!“ (hacer)", "o": ["No haces fuego", "No hagas fuego", "No hace fuego"], "a": 1, "f": "No hagas — von der yo-Form hago, -o weg, -as dran."}, {"t": "Welcher Schritt kommt zuerst?", "o": ["Infinitiv nehmen", "yo-Form im Präsens nehmen", "tú-Form nehmen"], "a": 1, "f": "Die yo-Form. Nur so kommen unregelmäßige Stämme automatisch mit."}, {"t": "„Sei nicht so streng!“ (ser)", "o": ["No seas", "No eres", "No sé"], "a": 0, "f": "No seas — ser ist eine der vier echten Ausnahmen."}, {"t": "„Geht nicht dorthin!“ (vosotros, ir)", "o": ["No vais", "No vayáis", "No id"], "a": 1, "f": "No vayáis — ir ist unregelmäßig, vosotros-Endung -áis."}, {"t": "escribir → verneinter Imperativ (tú)", "o": ["no escribes", "no escribas", "no escribe"], "a": 1, "f": "no escribas — -ir-Verben bekommen wie -er-Verben die Endung -as."}, {"t": "„Wirf den Müll nicht auf den Boden!“ (tirar)", "o": ["No tires", "No tiras", "No tira"], "a": 0, "f": "No tires — tirar ist -ar, also -es."}];
+let done=0,right=0;
+function render(){
+  document.getElementById('quiz').innerHTML=Q.map((q,i)=>
+    '<div class="q" id="q'+i+'"><div class="txt">'+q.t+'</div><div class="opts">'
+    + q.o.map((o,j)=>'<button type="button" onclick="pick('+i+','+j+')">'+o+'</button>').join('')
+    + '</div><div class="fb">'+q.f+'</div></div>').join('');
+  done=0;right=0;upd();
+}
+function pick(i,j){
+  const el=document.getElementById('q'+i);
+  if(el.classList.contains('answered'))return;
+  el.classList.add('answered');
+  const bs=el.querySelectorAll('.opts button');
+  bs[j].classList.add(j===Q[i].a?'right':'wrong');
+  if(j!==Q[i].a)bs[Q[i].a].classList.add('right');
+  done++; if(j===Q[i].a)right++;
+  upd();
+}
+function upd(){
+  const s=document.getElementById('sc');
+  s.textContent=right+' von '+Q.length+(done===Q.length?(right/Q.length>=.8?'  ✓ sitzt':'  – nochmal ansehen'):'');
+}
+function reset(){render();window.scrollTo({top:0,behavior:'smooth'})}
+render();
+</script>
+</body>
+</html>

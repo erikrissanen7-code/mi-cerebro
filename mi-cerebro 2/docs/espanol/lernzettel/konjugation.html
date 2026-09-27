@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Konjugation · Wichtige Verben + ser/estar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF5E9; --paper2:#F4EAD6; --ink:#2B2419; --soft:#6B5E48;
+    --teal:#156460; --teal-deep:#0E4744; --terra:#C9502B; --gold:#E0A02A;
+    --card:#FFFFFF; --line:#E7DBC2; --ok:#1f7a4d;
+    --pres:#156460; --indef:#C9502B; --imp:#1F7A8C;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);font-family:'Inter',system-ui,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased;padding-bottom:70px}
+  .wrap{max-width:720px;margin:0 auto;padding:0 16px}
+
+  header.hero{background:linear-gradient(150deg,var(--teal-deep),var(--teal));color:#fff;padding:28px 16px 20px;text-align:center;border-bottom:4px solid var(--gold)}
+  .hero .eyebrow{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600}
+  .hero h1{font-family:'Fraunces',serif;font-weight:600;font-size:1.7rem;line-height:1.12;margin:6px 0 4px}
+  .hero h1 span{font-style:italic;color:#ffe9bf}
+  .hero p{font-size:.84rem;opacity:.9;max-width:480px;margin:0 auto}
+
+  nav.tabs{position:sticky;top:0;z-index:30;background:var(--paper);border-bottom:1px solid var(--line);display:flex;gap:4px;padding:8px 10px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  nav.tabs button{flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--soft);font-family:inherit;font-weight:600;font-size:.8rem;padding:8px 13px;border-radius:999px;cursor:pointer;white-space:nowrap;transition:all .15s}
+  nav.tabs button.active{background:var(--teal);color:#fff;border-color:var(--teal)}
+  nav.tabs button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+  section.tab{display:none;padding:20px 0 10px;animation:fade .25s ease}
+  section.tab.show{display:block}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+  .eyebrow2{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;font-weight:700;margin-bottom:4px;color:var(--teal)}
+  h2{font-family:'Fraunces',serif;font-weight:600;font-size:1.4rem;margin-bottom:2px}
+  h2 em{font-style:italic;color:var(--terra)}
+  .lead{color:var(--soft);font-size:.88rem;margin-bottom:14px}
+
+  .search{width:100%;border:1px solid var(--line);background:var(--card);border-radius:10px;padding:10px 14px;font-family:inherit;font-size:.92rem;color:var(--ink);margin-bottom:6px}
+  .search:focus{outline:2px solid var(--teal)}
+  .count{font-size:.78rem;color:var(--soft);margin:0 2px 10px}
+
+  /* endings reference */
+  .endref{display:grid;grid-template-columns:1fr;gap:8px;margin:6px 0 4px}
+  @media(min-width:560px){.endref{grid-template-columns:1fr 1fr 1fr}}
+  .endref .e{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:11px 13px}
+  .endref .e .h{font-weight:700;font-size:.82rem;margin-bottom:5px}
+  .endref .e.p .h{color:var(--pres)} .endref .e.i .h{color:var(--indef)} .endref .e.m .h{color:var(--imp)}
+  .endref .e table{width:100%;border-collapse:collapse;font-size:.78rem}
+  .endref .e td{padding:1px 0}
+  .endref .e td:last-child{text-align:right;font-weight:600;color:var(--ink)}
+  .endref small{color:var(--soft)}
+
+  /* verb conjugation card */
+  .vcard{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 15px 12px;margin:10px 0;box-shadow:0 2px 8px rgba(43,36,25,.04)}
+  .vcard .head{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:9px;margin-bottom:10px}
+  .vcard .inf{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:700;color:var(--teal-deep)}
+  .vcard .de{color:var(--soft);font-size:.9rem}
+  .vcard .tag{margin-left:auto;background:#FBE0D6;color:var(--terra);font-size:.64rem;font-weight:700;padding:2px 8px;border-radius:6px;white-space:nowrap}
+  .vcard .tag.reg{background:#E3F2EA;color:var(--ok)}
+  .conj{display:grid;grid-template-columns:1fr;gap:12px}
+  @media(min-width:560px){.conj{grid-template-columns:1fr 1fr 1fr}}
+  .col .ct{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:5px;padding-bottom:3px;border-bottom:2px solid}
+  .col.p .ct{color:var(--pres);border-color:var(--pres)}
+  .col.i .ct{color:var(--indef);border-color:var(--indef)}
+  .col.m .ct{color:var(--imp);border-color:var(--imp)}
+  .col table{width:100%;border-collapse:collapse;font-size:.82rem}
+  .col td{padding:2px 0;vertical-align:baseline}
+  .col td.pro{color:var(--soft);padding-right:6px;white-space:nowrap;width:38%}
+  .col td.frm{font-weight:600;color:var(--ink)}
+  .col td .irr{color:var(--terra)}
+  .note{margin-top:9px;font-size:.78rem;color:var(--soft);background:var(--paper2);border-radius:8px;padding:7px 11px}
+  .note b{color:var(--teal-deep)}
+
+  /* ser/estar */
+  .cols2{display:grid;grid-template-columns:1fr;gap:12px;margin:10px 0}
+  @media(min-width:560px){.cols2{grid-template-columns:1fr 1fr}}
+  .vbox{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 15px}
+  .vbox.ser{border-top:4px solid var(--teal)}
+  .vbox.estar{border-top:4px solid var(--terra)}
+  .vbox h3{font-family:'Fraunces',serif;font-size:1.15rem;margin-bottom:2px}
+  .vbox.ser h3{color:var(--teal-deep)} .vbox.estar h3{color:var(--terra)}
+  .vbox .sub{font-size:.8rem;color:var(--soft);margin-bottom:9px}
+  .vbox ul{list-style:none;margin:0}
+  .vbox li{font-size:.85rem;padding:6px 0;border-top:1px solid var(--line)}
+  .vbox li:first-child{border-top:none}
+  .vbox li b{color:var(--ink)}
+  .vbox li .ex{display:block;color:var(--soft);font-style:italic;font-size:.8rem;margin-top:1px}
+  .vs{text-align:center;font-family:'Fraunces',serif;font-weight:700;color:var(--gold);margin:4px 0}
+  .gold{background:#FBEFD9;border-left:4px solid var(--gold);border-radius:10px;padding:12px 14px;font-size:.85rem;margin:12px 0}
+  .gold b{color:#9a6c08}
+  .teal{background:#EAF2F0;border-left:4px solid var(--teal);border-radius:10px;padding:12px 14px;font-size:.85rem;margin:12px 0}
+  .teal b{color:var(--teal-deep)}
+  table.mini{width:100%;border-collapse:collapse;font-size:.85rem;margin:8px 0;background:var(--card);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  table.mini th{background:var(--paper2);text-align:left;padding:8px 11px;font-size:.78rem;color:var(--teal-deep)}
+  table.mini td{padding:8px 11px;border-top:1px solid var(--line)}
+  table.mini td:first-child{font-weight:600;color:var(--teal-deep);white-space:nowrap}
+
+  footer{text-align:center;color:var(--soft);font-size:.78rem;padding:26px 16px 10px}
+  footer b{color:var(--teal-deep)}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+  .backbar{position:sticky;top:0;z-index:99;background:#FBF5E9;border-bottom:1px solid #E7DBC2;padding:9px 16px}
+  .backbar a{color:#0E4744;text-decoration:none;font-weight:600;font-size:.86rem;font-family:'Inter',system-ui,sans-serif}
+</style>
+</head>
+<body>
+<div class="backbar"><a href="../grammatik.html">&larr; Grammatik</a></div>
+
+<header class="hero">
+  <div class="eyebrow">Conjugación · Verbos</div>
+  <h1>Konjugation <span>wichtiger Verben</span><br>+ ser / estar</h1>
+  <p>Voll durchkonjugiert: <b style="color:#ffe9bf">Presente · Indefinido · Imperfecto</b> — mit Bedeutung. Plus der ser/estar-Unterschied.</p>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button class="active" data-t="verbos">📚 Verben</button>
+  <button data-t="serestar">⚖️ ser / estar</button>
+  <button data-t="endungen">🔑 Endungen</button>
+</nav>
+
+<div class="wrap">
+
+<!-- ============ VERBEN ============ -->
+<section class="tab show" id="verbos">
+  <div class="eyebrow2">Tablas de conjugación</div>
+  <h2>Verben <em>durchkonjugiert</em></h2>
+  <p class="lead"><span style="color:var(--pres);font-weight:700">Presente</span> · <span style="color:var(--indef);font-weight:700">Indefinido</span> · <span style="color:var(--imp);font-weight:700">Imperfecto</span>. <span style="color:var(--terra)">Rote Formen</span> = unregelmäßig/Stammwechsel.</p>
+  <input class="search" id="vsearch" placeholder="🔍 Verb suchen (z.B. tener / haben)…" oninput="filterV(this.value)">
+  <div class="count" id="vcount"></div>
+  <div id="vlist"></div>
+</section>
+
+<!-- ============ SER / ESTAR ============ -->
+<section class="tab" id="serestar">
+  <div class="eyebrow2">El clásico</div>
+  <h2>ser <em>oder</em> estar?</h2>
+  <p class="lead">Beide heißen „sein" — aber sie werden komplett unterschiedlich benutzt. Hier die klare Regel.</p>
+
+  <div class="gold"><b>Die Faustregel in einem Satz:</b> <b style="color:var(--teal-deep)">ser</b> = was etwas <u>IST</u> (fest, dauerhaft, Identität) · <b style="color:var(--terra)">estar</b> = wo & wie etwas <u>GERADE IST</u> (Ort, Zustand, vorübergehend).</div>
+
+  <div class="cols2">
+    <div class="vbox ser">
+      <h3>ser</h3>
+      <div class="sub">feste Eigenschaften & Identität</div>
+      <ul>
+        <li><b>Herkunft</b> <span class="ex">Soy de Sevilla. — Ich bin aus Sevilla.</span></li>
+        <li><b>Beruf / Identität</b> <span class="ex">Es profesor. — Er ist Lehrer.</span></li>
+        <li><b>Charakter / feste Eigenschaft</b> <span class="ex">Marta es simpática. — Marta ist nett.</span></li>
+        <li><b>Aussehen (dauerhaft)</b> <span class="ex">La ciudad es preciosa. — Die Stadt ist wunderschön.</span></li>
+        <li><b>Uhrzeit & Datum</b> <span class="ex">Son las dos. · Hoy es lunes.</span></li>
+        <li><b>Besitz / Material</b> <span class="ex">El libro es de María.</span></li>
+      </ul>
+    </div>
+    <div class="vbox estar">
+      <h3>estar</h3>
+      <div class="sub">Ort & vorübergehende Zustände</div>
+      <ul>
+        <li><b>Ort / Position</b> <span class="ex">Estoy en casa. — Ich bin zu Hause.</span></li>
+        <li><b>Lage einer Region</b> <span class="ex">Andalucía está en el sur.</span></li>
+        <li><b>Gefühl / Stimmung</b> <span class="ex">Estoy cansado. — Ich bin müde.</span></li>
+        <li><b>vorübergehender Zustand</b> <span class="ex">El café está frío. — Der Kaffee ist (gerade) kalt.</span></li>
+        <li><b>estar + -ndo (gerade dabei)</b> <span class="ex">Estoy estudiando. — Ich lerne gerade.</span></li>
+        <li><b>feste Wendungen</b> <span class="ex">estar de acuerdo · estar bien</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="vs">ser ⚔️ estar</div>
+
+  <div class="teal"><b>Bedeutungs-Wechsel — gleiches Adjektiv, andere Bedeutung:</b></div>
+  <table class="mini">
+    <tr><th>Adjektiv</th><th>mit ser</th><th>mit estar</th></tr>
+    <tr><td>aburrido</td><td>langweilig (Charakter)</td><td>gelangweilt (gerade)</td></tr>
+    <tr><td>listo</td><td>schlau</td><td>fertig / bereit</td></tr>
+    <tr><td>rico</td><td>reich</td><td>lecker</td></tr>
+    <tr><td>bueno</td><td>gut (Person/Sache)</td><td>gesund / lecker</td></tr>
+  </table>
+
+  <div class="gold"><b>Eselsbrücke 🧠:</b> <b>estar</b> hat ein <b>„a" wie Aufenthaltsort & Augenblick</b> (Ort + Zustand). <b>ser</b> ist für das, was du in einem Steckbrief schreiben würdest (Name, Herkunft, Beruf, Charakter).</div>
+
+  <h2 style="margin-top:24px">Konjugation von <em>ser</em> &amp; <em>estar</em></h2>
+  <div id="serestarConj"></div>
+</section>
+
+<!-- ============ ENDUNGEN ============ -->
+<section class="tab" id="endungen">
+  <div class="eyebrow2">Las terminaciones</div>
+  <h2>Die <em>Endungen</em> auf einen Blick</h2>
+  <p class="lead">Wenn du diese Tabellen kannst, kannst du fast jedes regelmäßige Verb bilden.</p>
+
+  <h3 style="font-family:Fraunces;color:var(--pres);margin:14px 0 6px">Presente (Gegenwart)</h3>
+  <div class="endref">
+    <div class="e p"><div class="h">–ar (hablar)</div><table><tr><td>yo</td><td>habl<b>o</b></td></tr><tr><td>tú</td><td>habl<b>as</b></td></tr><tr><td>él/ella</td><td>habl<b>a</b></td></tr><tr><td>nosotros</td><td>habl<b>amos</b></td></tr><tr><td>vosotros</td><td>habl<b>áis</b></td></tr><tr><td>ellos</td><td>habl<b>an</b></td></tr></table></div>
+    <div class="e p"><div class="h">–er (comer)</div><table><tr><td>yo</td><td>com<b>o</b></td></tr><tr><td>tú</td><td>com<b>es</b></td></tr><tr><td>él/ella</td><td>com<b>e</b></td></tr><tr><td>nosotros</td><td>com<b>emos</b></td></tr><tr><td>vosotros</td><td>com<b>éis</b></td></tr><tr><td>ellos</td><td>com<b>en</b></td></tr></table></div>
+    <div class="e p"><div class="h">–ir (vivir)</div><table><tr><td>yo</td><td>viv<b>o</b></td></tr><tr><td>tú</td><td>viv<b>es</b></td></tr><tr><td>él/ella</td><td>viv<b>e</b></td></tr><tr><td>nosotros</td><td>viv<b>imos</b></td></tr><tr><td>vosotros</td><td>viv<b>ís</b></td></tr><tr><td>ellos</td><td>viv<b>en</b></td></tr></table></div>
+  </div>
+
+  <h3 style="font-family:Fraunces;color:var(--indef);margin:18px 0 6px">Indefinido (abgeschlossene Vergangenheit)</h3>
+  <div class="endref">
+    <div class="e i"><div class="h">–ar</div><table><tr><td>yo</td><td>-<b>é</b></td></tr><tr><td>tú</td><td>-<b>aste</b></td></tr><tr><td>él/ella</td><td>-<b>ó</b></td></tr><tr><td>nosotros</td><td>-<b>amos</b></td></tr><tr><td>vosotros</td><td>-<b>asteis</b></td></tr><tr><td>ellos</td><td>-<b>aron</b></td></tr></table></div>
+    <div class="e i"><div class="h">–er / –ir</div><table><tr><td>yo</td><td>-<b>í</b></td></tr><tr><td>tú</td><td>-<b>iste</b></td></tr><tr><td>él/ella</td><td>-<b>ió</b></td></tr><tr><td>nosotros</td><td>-<b>imos</b></td></tr><tr><td>vosotros</td><td>-<b>isteis</b></td></tr><tr><td>ellos</td><td>-<b>ieron</b></td></tr></table></div>
+    <div class="e i"><div class="h"><small>starke Verben (kein Akzent!)</small></div><table><tr><td>yo</td><td>-<b>e</b></td></tr><tr><td>tú</td><td>-<b>iste</b></td></tr><tr><td>él/ella</td><td>-<b>o</b></td></tr><tr><td>nosotros</td><td>-<b>imos</b></td></tr><tr><td>vosotros</td><td>-<b>isteis</b></td></tr><tr><td>ellos</td><td>-<b>ieron</b></td></tr></table></div>
+  </div>
+  <div class="gold"><b>Starke Verben</b> (tener→tuv-, poder→pud-, estar→estuv-, hacer→hic-, querer→quis-, venir→vin-, poner→pus-, saber→sup-): eigener Stamm + die Endungen <b>-e / -iste / -o / -imos / -isteis / -ieron</b> — <u>ohne Akzent</u>!</div>
+
+  <h3 style="font-family:Fraunces;color:var(--imp);margin:18px 0 6px">Imperfecto (Beschreibung / Gewohnheit)</h3>
+  <div class="endref">
+    <div class="e m"><div class="h">–ar</div><table><tr><td>yo</td><td>-<b>aba</b></td></tr><tr><td>tú</td><td>-<b>abas</b></td></tr><tr><td>él/ella</td><td>-<b>aba</b></td></tr><tr><td>nosotros</td><td>-<b>ábamos</b></td></tr><tr><td>vosotros</td><td>-<b>abais</b></td></tr><tr><td>ellos</td><td>-<b>aban</b></td></tr></table></div>
+    <div class="e m"><div class="h">–er / –ir</div><table><tr><td>yo</td><td>-<b>ía</b></td></tr><tr><td>tú</td><td>-<b>ías</b></td></tr><tr><td>él/ella</td><td>-<b>ía</b></td></tr><tr><td>nosotros</td><td>-<b>íamos</b></td></tr><tr><td>vosotros</td><td>-<b>íais</b></td></tr><tr><td>ellos</td><td>-<b>ían</b></td></tr></table></div>
+    <div class="e m"><div class="h"><small>nur 3 unregelmäßig</small></div><table><tr><td>ser</td><td>era…</td></tr><tr><td>ir</td><td>iba…</td></tr><tr><td>ver</td><td>veía…</td></tr></table></div>
+  </div>
+  <div class="teal"><b>Gute Nachricht:</b> Das Imperfecto ist die <b>einfachste</b> Zeit — fast alles regelmäßig, nur <b>ser, ir, ver</b> sind unregelmäßig.</div>
+</section>
+
+</div>
+
+<footer>Hecho para <b>Erik</b> · Presente · Indefinido · Imperfecto · ¡A conjugar! 💪</footer>
+
+<script>
+/* ---------- DATA ----------
+each verb: {inf, de, tag, irr(bool), pres[6], indef[6], imp[6], note}
+forms with * around part → wird rot markiert (unregelmäßig)
+pronomen-reihenfolge: yo, tú, él/ella, nosotros, vosotros, ellos */
+const PRON=["yo","tú","él/ella","nosotros","vosotros","ellos/as"];
+
+function r(s){return s.replace(/\*(.+?)\*/g,'<span class="irr">$1</span>');}
+
+const VERBS=[
+{inf:"ser",de:"sein (fest, Identität)",tag:"unreg.",irr:1,
+ pres:["*soy*","*eres*","*es*","*somos*","*sois*","*son*"],
+ indef:["*fui*","*fuiste*","*fue*","*fuimos*","*fuisteis*","*fueron*"],
+ imp:["*era*","*eras*","*era*","*éramos*","*erais*","*eran*"],
+ note:"indefinido = identisch mit <b>ir</b> (fui, fuiste, fue…). Kontext entscheidet."},
+
+{inf:"estar",de:"sein (Ort, Zustand)",tag:"unreg.",irr:1,
+ pres:["*estoy*","*estás*","*está*","estamos","estáis","*están*"],
+ indef:["*estuve*","*estuviste*","*estuvo*","*estuvimos*","*estuvisteis*","*estuvieron*"],
+ imp:["estaba","estabas","estaba","estábamos","estabais","estaban"],
+ note:"starkes Verb: Stamm <b>estuv-</b> + Endungen ohne Akzent."},
+
+{inf:"tener",de:"haben",tag:"e→ie / unreg.",irr:1,
+ pres:["*tengo*","*tienes*","*tiene*","tenemos","tenéis","*tienen*"],
+ indef:["*tuve*","*tuviste*","*tuvo*","*tuvimos*","*tuvisteis*","*tuvieron*"],
+ imp:["tenía","tenías","tenía","teníamos","teníais","tenían"],
+ note:"Stamm im indefinido: <b>tuv-</b>. Wichtig für „tener que“ (müssen)."},
+
+{inf:"hacer",de:"machen, tun",tag:"unreg.",irr:1,
+ pres:["*hago*","haces","hace","hacemos","hacéis","hacen"],
+ indef:["*hice*","*hiciste*","*hizo*","*hicimos*","*hicisteis*","*hicieron*"],
+ imp:["hacía","hacías","hacía","hacíamos","hacíais","hacían"],
+ note:"Achtung: él <b>hizo</b> (mit z!). Wetter: <b>hacía</b> sol/calor."},
+
+{inf:"ir",de:"gehen, fahren",tag:"unreg.",irr:1,
+ pres:["*voy*","*vas*","*va*","*vamos*","*vais*","*van*"],
+ indef:["*fui*","*fuiste*","*fue*","*fuimos*","*fuisteis*","*fueron*"],
+ imp:["*iba*","*ibas*","*iba*","*íbamos*","*ibais*","*iban*"],
+ note:"indefinido = gleich wie ser. <b>ir a + inf.</b> = nahe Zukunft (voy a viajar)."},
+
+{inf:"venir",de:"kommen",tag:"e→ie / unreg.",irr:1,
+ pres:["*vengo*","*vienes*","*viene*","venimos","venís","*vienen*"],
+ indef:["*vine*","*viniste*","*vino*","*vinimos*","*vinisteis*","*vinieron*"],
+ imp:["venía","venías","venía","veníamos","veníais","venían"],
+ note:"Stamm indefinido: <b>vin-</b>. venir = Bewegung zum Sprecher hin."},
+
+{inf:"poder",de:"können",tag:"o→ue / unreg.",irr:1,
+ pres:["*puedo*","*puedes*","*puede*","podemos","podéis","*pueden*"],
+ indef:["*pude*","*pudiste*","*pudo*","*pudimos*","*pudisteis*","*pudieron*"],
+ imp:["podía","podías","podía","podíamos","podíais","podían"],
+ note:"Stamm indefinido: <b>pud-</b>."},
+
+{inf:"querer",de:"wollen, mögen",tag:"e→ie / unreg.",irr:1,
+ pres:["*quiero*","*quieres*","*quiere*","queremos","queréis","*quieren*"],
+ indef:["*quise*","*quisiste*","*quiso*","*quisimos*","*quisisteis*","*quisieron*"],
+ imp:["quería","querías","quería","queríamos","queríais","querían"],
+ note:"Stamm indefinido: <b>quis-</b>."},
+
+{inf:"saber",de:"wissen, können",tag:"unreg.",irr:1,
+ pres:["*sé*","sabes","sabe","sabemos","sabéis","saben"],
+ indef:["*supe*","*supiste*","*supo*","*supimos*","*supisteis*","*supieron*"],
+ imp:["sabía","sabías","sabía","sabíamos","sabíais","sabían"],
+ note:"yo-Form: <b>sé</b> (mit Akzent). Stamm indefinido: <b>sup-</b>."},
+
+{inf:"poner",de:"stellen, setzen, legen",tag:"unreg.",irr:1,
+ pres:["*pongo*","pones","pone","ponemos","ponéis","ponen"],
+ indef:["*puse*","*pusiste*","*puso*","*pusimos*","*pusisteis*","*pusieron*"],
+ imp:["ponía","ponías","ponía","poníamos","poníais","ponían"],
+ note:"Stamm indefinido: <b>pus-</b>. ponerse = sich anziehen / werden."},
+
+{inf:"decir",de:"sagen",tag:"e→i / unreg.",irr:1,
+ pres:["*digo*","*dices*","*dice*","decimos","decís","*dicen*"],
+ indef:["*dije*","*dijiste*","*dijo*","*dijimos*","*dijisteis*","*dijeron*"],
+ imp:["decía","decías","decía","decíamos","decíais","decían"],
+ note:"ellos: <b>dijeron</b> (kein „i“ nach j!). Gilt auch für traer→trajeron."},
+
+{inf:"dar",de:"geben",tag:"unreg.",irr:1,
+ pres:["*doy*","das","da","damos","dais","dan"],
+ indef:["*di*","*diste*","*dio*","*dimos*","*disteis*","*dieron*"],
+ imp:["daba","dabas","daba","dábamos","dabais","daban"],
+ note:"indefinido kurz & ohne Akzent: di, dio."},
+
+{inf:"ver",de:"sehen, ansehen",tag:"unreg.",irr:1,
+ pres:["*veo*","ves","ve","vemos","veis","ven"],
+ indef:["*vi*","viste","*vio*","vimos","visteis","vieron"],
+ imp:["*veía*","*veías*","*veía*","*veíamos*","*veíais*","*veían*"],
+ note:"imperfecto unregelmäßig: <b>veía</b>… (eines der nur 3 Verben!)."},
+
+{inf:"hablar",de:"sprechen",tag:"regelmäßig",irr:0,
+ pres:["hablo","hablas","habla","hablamos","habláis","hablan"],
+ indef:["hablé","hablaste","habló","hablamos","hablasteis","hablaron"],
+ imp:["hablaba","hablabas","hablaba","hablábamos","hablabais","hablaban"],
+ note:"Muster-Verb für <b>alle –ar-Verben</b> (visitar, viajar, comprar, tomar…)."},
+
+{inf:"comer",de:"essen",tag:"regelmäßig",irr:0,
+ pres:["como","comes","come","comemos","coméis","comen"],
+ indef:["comí","comiste","comió","comimos","comisteis","comieron"],
+ imp:["comía","comías","comía","comíamos","comíais","comían"],
+ note:"Muster-Verb für <b>alle –er-Verben</b> (aprender, beber, ver-ähnlich…)."},
+
+{inf:"vivir",de:"leben, wohnen",tag:"regelmäßig",irr:0,
+ pres:["vivo","vives","vive","vivimos","vivís","viven"],
+ indef:["viví","viviste","vivió","vivimos","vivisteis","vivieron"],
+ imp:["vivía","vivías","vivía","vivíamos","vivíais","vivían"],
+ note:"Muster-Verb für <b>alle –ir-Verben</b> (escribir, decidir, recibir…)."},
+
+{inf:"jugar",de:"spielen",tag:"u→ue",irr:1,
+ pres:["*juego*","*juegas*","*juega*","jugamos","jugáis","*juegan*"],
+ indef:["*jugué*","jugaste","jugó","jugamos","jugasteis","jugaron"],
+ imp:["jugaba","jugabas","jugaba","jugábamos","jugabais","jugaban"],
+ note:"yo-indefinido: <b>jugué</b> (g→gu vor e)."},
+
+{inf:"pensar",de:"denken",tag:"e→ie",irr:1,
+ pres:["*pienso*","*piensas*","*piensa*","pensamos","pensáis","*piensan*"],
+ indef:["pensé","pensaste","pensó","pensamos","pensasteis","pensaron"],
+ imp:["pensaba","pensabas","pensaba","pensábamos","pensabais","pensaban"],
+ note:"Stammwechsel <b>nur im Presente</b> (e→ie). Indefinido & Imperfecto regelmäßig! Gleich: empezar, cerrar, querer, entender, perder, preferir."},
+
+{inf:"dormir",de:"schlafen",tag:"o→ue / o→u",irr:1,
+ pres:["*duermo*","*duermes*","*duerme*","dormimos","dormís","*duermen*"],
+ indef:["dormí","dormiste","*durmió*","dormimos","dormisteis","*durmieron*"],
+ imp:["dormía","dormías","dormía","dormíamos","dormíais","dormían"],
+ note:"Presente o→ue. Indefinido: 3. Person <b>durmió/durmieron</b> (o→u). Gleich: morir."},
+
+{inf:"pedir",de:"bitten, bestellen",tag:"e→i",irr:1,
+ pres:["*pido*","*pides*","*pide*","pedimos","pedís","*piden*"],
+ indef:["pedí","pediste","*pidió*","pedimos","pedisteis","*pidieron*"],
+ imp:["pedía","pedías","pedía","pedíamos","pedíais","pedían"],
+ note:"3. Person indefinido: <b>pidió/pidieron</b> (e→i). Gleich: seguir, repetir."},
+
+{inf:"levantarse",de:"aufstehen",tag:"reflexiv",irr:0,
+ pres:["me levanto","te levantas","se levanta","nos levantamos","os levantáis","se levantan"],
+ indef:["me levanté","te levantaste","se levantó","nos levantamos","os levantasteis","se levantaron"],
+ imp:["me levantaba","te levantabas","se levantaba","nos levantábamos","os levantabais","se levantaban"],
+ note:"Reflexivpronomen <b>vor</b> dem Verb: me/te/se/nos/os/se. Gleich: ducharse, acostarse, quedarse."}
+];
+
+function renderVerb(v){
+  const cols=[["Presente","p","pres"],["Indefinido","i","indef"],["Imperfecto","m","imp"]];
+  let conj="";
+  cols.forEach(([title,cls,key])=>{
+    let rows="";
+    for(let i=0;i<6;i++){
+      rows+=`<tr><td class="pro">${PRON[i]}</td><td class="frm">${r(v[key][i])}</td></tr>`;
+    }
+    conj+=`<div class="col ${cls}"><div class="ct">${title}</div><table>${rows}</table></div>`;
+  });
+  const tagcls=v.irr?"":"reg";
+  return `<div class="vcard" data-s="${(v.inf+' '+v.de).toLowerCase()}">
+    <div class="head"><span class="inf">${v.inf}</span><span class="de">— ${v.de}</span><span class="tag ${tagcls}">${v.tag}</span></div>
+    <div class="conj">${conj}</div>
+    ${v.note?`<div class="note">💡 ${v.note}</div>`:""}
+  </div>`;
+}
+
+function renderAll(){
+  document.getElementById("vlist").innerHTML=VERBS.map(renderVerb).join("");
+  document.getElementById("vcount").textContent=`${VERBS.length} Verben durchkonjugiert`;
+  // ser/estar conjugation in their own tab
+  const se=VERBS.filter(v=>v.inf==="ser"||v.inf==="estar").map(renderVerb).join("");
+  document.getElementById("serestarConj").innerHTML=se;
+}
+function filterV(q){
+  q=q.trim().toLowerCase();
+  let shown=0;
+  document.querySelectorAll("#vlist .vcard").forEach(c=>{
+    const m=c.dataset.s.includes(q); c.style.display=m?"":"none"; if(m)shown++;
+  });
+  document.getElementById("vcount").textContent = q?`${shown} Treffer`:`${VERBS.length} Verben durchkonjugiert`;
+}
+
+/* tabs */
+const tabs=document.querySelectorAll('#tabs button');
+tabs.forEach(b=>b.addEventListener('click',()=>{
+  tabs.forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('section.tab').forEach(s=>s.classList.remove('show'));
+  b.classList.add('active');
+  document.getElementById(b.dataset.t).classList.add('show');
+  window.scrollTo({top:0,behavior:'smooth'});
+}));
+
+renderAll();
+</script>
+<script src="../../assets/core.js"></script>
+</body>
+</html>
